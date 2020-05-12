@@ -55,12 +55,14 @@ export class AdProvider extends Component {
   };
 
   componentDidMount() {
-    axios.get('/posts').then((res) => {
-      this.setState({
-        ads: res.data.message,
-        filteredAds: res.data.message,
+    axios
+      .get('https://radiant-fortress-56278.herokuapp.com/posts')
+      .then((res) => {
+        this.setState({
+          ads: res.data.message,
+          filteredAds: res.data.message,
+        });
       });
-    });
   }
 
   handleChange = (e) => {
