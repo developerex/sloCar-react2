@@ -1,0 +1,31 @@
+.default {
+  display: grid;
+
+  div {
+    text-align: center;
+    margin-top: 1rem;
+
+    h4 {
+      font-size: 6rem;
+    }
+
+    p {
+      font-size: 4rem;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    img {
+      display: block;
+      margin: 0 auto;
+    }
+  }
+
+  &__bg {
+    height: 300px;
+    width: 100%;
+    margin-top: 0 !important;
+    background-color: #555;
+    border-bottom: 2px solid #fff;
+  }
+}

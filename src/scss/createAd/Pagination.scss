@@ -1,0 +1,29 @@
+@import '../variables.scss';
+
+.createAdSteps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__btn {
+    width: 15rem;
+    height: 4rem;
+    font-size: 2rem;
+    cursor: pointer;
+    border: 1px solid #555;
+    background-color: #fff;
+    outline: none;
+    color: #555;
+    transition: all 0.3s;
+    margin: 0 10rem;
+
+    &:hover {
+      background-color: #555;
+      color: #fff;
+    }
+  }
+}
+
+.invisible {
+  visibility: hidden;
+}

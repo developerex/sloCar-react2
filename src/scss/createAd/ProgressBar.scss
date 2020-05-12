@@ -1,0 +1,13 @@
+.progressBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__bg {
+    width: 700px;
+  }
+
+  &__bar {
+    background-color: #555 !important;
+  }
+}

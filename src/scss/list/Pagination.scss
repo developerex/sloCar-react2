@@ -1,0 +1,51 @@
+@import '../variables.scss';
+.prevNext {
+  grid-row: 3 / 4;
+  grid-column: col-start 2 / col-end 7;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  &__btn {
+    width: 12rem;
+    height: 5rem;
+    font-size: 1.8rem;
+    cursor: pointer;
+    border: 1px solid #555;
+    background-color: #fff;
+    outline: none;
+    color: #555;
+    transition: all 0.3s;
+
+    &:hover {
+      background-color: #555;
+      color: #fff;
+    }
+  }
+
+  &__pages {
+    & div {
+      display: flex;
+
+      & p {
+        font-size: 1.8rem;
+        border: 1px solid #555;
+        padding: 0.5rem 1.5rem;
+        margin: 0.2rem;
+      }
+    }
+    &--current {
+      background-color: #555;
+      color: white;
+    }
+    &--zuViel {
+      display: none;
+      visibility: hidden;
+      padding: 0;
+    }
+  }
+}
+
+.invisible {
+  visibility: hidden;
+}

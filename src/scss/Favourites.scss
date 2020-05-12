@@ -1,0 +1,15 @@
+.favourites {
+  display: grid;
+  grid-template-columns:
+    [full-start] minmax(6rem, 1fr) [center-start]
+    repeat(8, [col-start] minmax(min-content, 12rem) [col-end])
+    [center-end] minmax(6rem, 1fr) [full-end];
+
+  &__zero {
+    grid-column: 1 / -1;
+    justify-self: center;
+    margin-top: 10rem;
+    font-size: 2rem;
+    margin-bottom: 80vh;
+  }
+}

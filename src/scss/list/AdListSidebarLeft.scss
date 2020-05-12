@@ -1,0 +1,61 @@
+@import '../variables.scss';
+
+.adList-sidebarLeft {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  display: flex;
+  flex-direction: column;
+
+  &__filter {
+    align-self: center;
+    width: 20rem;
+    height: 5rem;
+    margin-top: 5rem;
+    font-size: 1.8rem;
+    outline: none;
+    border: 2px solid #555;
+    cursor: pointer;
+    background-color: #fff;
+  }
+
+  &__content {
+    margin-top: 5rem;
+    width: 100%;
+    height: 450px;
+    transition: all 0.3s;
+    background-color: #fbfbfb;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #555;
+
+    & div {
+      & select {
+        margin: 1rem 0.5rem;
+        height: 30px;
+        width: 100px;
+        border: 1px solid #555;
+        outline: none;
+      }
+      &:last-child {
+        padding-top: 2rem;
+        & p {
+          color: white;
+          text-decoration: none;
+          font-size: 2.2rem;
+          font-weight: 600;
+          border-bottom: 2px solid white;
+        }
+      }
+    }
+
+    &--filter--true {
+      transform: translate(0);
+    }
+
+    &--filter--false {
+      transform: translate(-100%);
+    }
+  }
+}
