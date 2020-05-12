@@ -1,12 +1,17 @@
 import axios from 'axios';
 
 export const fetchAds = () => async (dispatch) => {
-  const res = await axios.get('/posts');
+  const res = await axios.get(
+    'https://radiant-fortress-56278.herokuapp.com/posts'
+  );
   dispatch({ type: 'FETCH_ADS', payload: res.data });
 };
 
 export const postAd = (values, history) => async (dispatch) => {
-  const res = await axios.post('/api/create_ad', values);
+  const res = await axios.post(
+    'https://radiant-fortress-56278.herokuapp.com/api/create_ad',
+    values
+  );
   dispatch(fetchAds()).then((res) => history.push('/'));
 
   dispatch({
@@ -22,26 +27,36 @@ export const postAd = (values, history) => async (dispatch) => {
 };
 
 export const fetchOneAd = (id) => async (dispatch) => {
-  const res = await axios.get(`/posts/${id}`);
+  const res = await axios.get(
+    `https://radiant-fortress-56278.herokuapp.com/posts/${id}`
+  );
   dispatch({ type: 'FETCH_ONE_AD', payload: res.data });
 };
 
 export const registerUser = (val) => async (dispatch) => {
-  const res = await axios.post('/api/users/register', val);
+  const res = await axios.post(
+    'https://radiant-fortress-56278.herokuapp.com/api/users/register',
+    val
+  );
   console.log(val);
   console.log(res.data);
   dispatch({ type: 'USER_REG', payload: res.data });
 };
 
 export const loginUser = (val) => async (dispatch) => {
-  const res = await axios.post('/api/users/login', val);
+  const res = await axios.post(
+    'https://radiant-fortress-56278.herokuapp.com/api/users/login',
+    val
+  );
   // console.log(res.data);
   //console.log('fromloginAction', res.data);
   dispatch({ type: 'USER_LOGIN', payload: res.data });
 };
 
 export const logoutUser = () => async (dispatch) => {
-  const res = await axios.get('/api/users/logout');
+  const res = await axios.get(
+    'https://radiant-fortress-56278.herokuapp.com/api/users/logout'
+  );
   dispatch({ type: 'USER_LOGOUT', payload: res.data });
 };
 
@@ -49,7 +64,8 @@ export const pozabilGesloUser = (val) => async (dispatch) => {
   const res = await axios({
     method: 'GET',
     params: val,
-    url: '/api/users/reset-password',
+    url:
+      'https://radiant-fortress-56278.herokuapp.com/api/users/reset-password',
     headers: { 'Content-Type': 'application/json' },
   });
   //console.log(res.data);
@@ -57,20 +73,28 @@ export const pozabilGesloUser = (val) => async (dispatch) => {
 };
 
 export const ponastavitevGesla = (token, val) => async (dispatch) => {
-  const res = await axios.post(`/api/users/password-reset/${token}`, val);
+  const res = await axios.post(
+    `https://radiant-fortress-56278.herokuapp.com/api/users/password-reset/${token}`,
+    val
+  );
 
   dispatch({ type: 'PONASTAVITEV_GESLA', payload: res.data });
 };
 
 export const potrditevEmaila = (token) => async (dispatch) => {
-  const res = await axios.get(`/api/users/confirmation/${token}`);
+  const res = await axios.get(
+    `https://radiant-fortress-56278.herokuapp.com/api/users/confirmation/${token}`
+  );
   dispatch({ type: 'POTRDITEV_EMAILA', payload: res.data });
 };
 
 export const userInfo = (id, token) => async (dispatch) => {
-  const res = await axios.get(`/api/users/${id}`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  const res = await axios.get(
+    `https://radiant-fortress-56278.herokuapp.com/api/users/${id}`,
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
 
   dispatch({ type: 'USER_INFO', payload: res.data });
 };
@@ -78,7 +102,7 @@ export const userInfo = (id, token) => async (dispatch) => {
 export const updateUser = (id, token, desc) => async (dispatch) => {
   const res = await axios({
     method: 'PATCH',
-    url: `/api/users/${id}`,
+    url: `https://radiant-fortress-56278.herokuapp.com/api/users/${id}`,
     data: {
       descryption: desc,
     },
@@ -92,7 +116,7 @@ export const spremembaGesla = (data, token) => async (dispatch) => {
   console.log(data);
   const res = await axios({
     method: 'PATCH',
-    url: `/api/users/update-password`,
+    url: `https://radiant-fortress-56278.herokuapp.com/api/users/update-password`,
     data,
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -101,21 +125,28 @@ export const spremembaGesla = (data, token) => async (dispatch) => {
 };
 
 export const deleteAccount = (id, token) => async (dispatch) => {
-  const res = await axios.delete(`/api/users/${id}`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  const res = await axios.delete(
+    `https://radiant-fortress-56278.herokuapp.com/api/users/${id}`,
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
 
   dispatch({ type: 'DELETE_ACCOUNT', payload: res.data });
 };
 
 export const validateToken = (token) => async (dispatch) => {
-  const res = await axios.post(`/api/users/activation-token-check/${token}`);
+  const res = await axios.post(
+    `https://radiant-fortress-56278.herokuapp.com/api/users/activation-token-check/${token}`
+  );
 
   dispatch({ type: 'VALIDATE_TOKEN', payload: res.data });
 };
 
 export const passwordResetTokenCheck = (token) => async (dispatch) => {
-  const res = await axios.post(`/api/users/pass-reset-token-check/${token}`);
+  const res = await axios.post(
+    `https://radiant-fortress-56278.herokuapp.com/api/users/pass-reset-token-check/${token}`
+  );
 
   dispatch({ type: 'PASS_RESET_TOKEN_CHECK', payload: res.data });
 };
@@ -125,7 +156,7 @@ export const passwordResetTokenCheck = (token) => async (dispatch) => {
 export const dodajMedPriljubljeneCD = (id, token) => async (dispatch) => {
   const res = await axios({
     method: 'GET',
-    url: '/api/users/favourites',
+    url: 'https://radiant-fortress-56278.herokuapp.com/api/users/favourites',
     headers: { Authorization: `Bearer ${token}` },
   });
 
@@ -142,7 +173,7 @@ export const dodajMedPriljubljeneCD = (id, token) => async (dispatch) => {
 export const izbrisiPriljubljeneCD = (id, token) => async (dispatch) => {
   const res = await axios({
     method: 'GET',
-    url: '/api/users/favourites',
+    url: 'https://radiant-fortress-56278.herokuapp.com/api/users/favourites',
     headers: { Authorization: `Bearer ${token}` },
   });
 
@@ -157,7 +188,7 @@ export const izbrisiPriljubljeneCD = (id, token) => async (dispatch) => {
 export const dodajMedPriljubljene = (token, array) => async (dispatch) => {
   const res = await axios({
     method: 'PATCH',
-    url: '/api/users/favourites',
+    url: 'https://radiant-fortress-56278.herokuapp.com/api/users/favourites',
     headers: { Authorization: `Bearer ${token}` },
     data: {
       favourites: `[${array}]`,
@@ -169,7 +200,7 @@ export const dodajMedPriljubljene = (token, array) => async (dispatch) => {
 export const getFavourites = (token) => async (dispatch) => {
   const res = await axios({
     method: 'GET',
-    url: '/api/users/favourites',
+    url: 'https://radiant-fortress-56278.herokuapp.com/api/users/favourites',
     headers: { Authorization: `Bearer ${token}` },
   });
 
@@ -181,7 +212,7 @@ export const getFavourites = (token) => async (dispatch) => {
 export const dodajPrimerjajCD = (id, token) => async (dispatch) => {
   const res = await axios({
     method: 'GET',
-    url: '/api/users/comparison',
+    url: 'https://radiant-fortress-56278.herokuapp.com/api/users/comparison',
     headers: { Authorization: `Bearer ${token}` },
   });
 
@@ -200,7 +231,7 @@ export const dodajPrimerjajCD = (id, token) => async (dispatch) => {
 export const izbrisiPrimerjajCD = (id, token) => async (dispatch) => {
   const res = await axios({
     method: 'GET',
-    url: '/api/users/comparison',
+    url: 'https://radiant-fortress-56278.herokuapp.com/api/users/comparison',
     headers: { Authorization: `Bearer ${token}` },
   });
 
@@ -215,7 +246,7 @@ export const izbrisiPrimerjajCD = (id, token) => async (dispatch) => {
 export const dodajMedPrimerjaj = (token, array) => async (dispatch) => {
   const res = await axios({
     method: 'PATCH',
-    url: '/api/users/comparison',
+    url: 'https://radiant-fortress-56278.herokuapp.com/api/users/comparison',
     headers: { Authorization: `Bearer ${token}` },
     data: {
       comparison: `[${array}]`,
@@ -227,7 +258,7 @@ export const dodajMedPrimerjaj = (token, array) => async (dispatch) => {
 export const getComparison = (token) => async (dispatch) => {
   const res = await axios({
     method: 'GET',
-    url: '/api/users/comparison',
+    url: 'https://radiant-fortress-56278.herokuapp.com/api/users/comparison',
     headers: { Authorization: `Bearer ${token}` },
   });
 

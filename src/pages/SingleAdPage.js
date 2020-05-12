@@ -12,11 +12,15 @@ export default class SingleAdPage extends React.Component {
   };
 
   componentDidMount() {
-    axios.get(`/posts/${this.props.match.params.ID}`).then((res) => {
-      this.setState({
-        adData: res.data.message,
+    axios
+      .get(
+        `https://radiant-fortress-56278.herokuapp.com/posts/${this.props.match.params.ID}`
+      )
+      .then((res) => {
+        this.setState({
+          adData: res.data.message,
+        });
       });
-    });
   }
 
   renderBgBlack = () => {
