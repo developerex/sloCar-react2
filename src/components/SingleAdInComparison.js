@@ -7,7 +7,206 @@ class SingleAdInList extends React.Component {
   state = {
     primerjaj: false,
     primerjajText: 'Primerjaj z drugim vozilom',
+
+    luci: null,
+    varnostPotnikov: null,
+    stabilizacija: null,
+    klima: null,
+    asistence: null,
+    multimedija: null,
+    notranja_oprema: null,
+    sedezi: null,
+    zunanja_oprema: null,
+    podvozje_in_vzmetenje: null,
+    parking: null,
+    kolesa: null,
+    xenonZarometi: null,
+    prilagodljiviZarometi: null,
+    biXenon: null,
+    meglenke: null,
+    zracneBlazine: null,
+    ABS: null,
+    ESP: null,
+    ASR: null,
+    TCS: null,
+    avtomatskaKlima: null,
+    triConskaKlima: null,
+    dvoConskaKlima: null,
+    stiriConskaKlima: null,
+    samodejnoOgrevanjeVozila: null,
+    SOSklicVsili: null,
+    OpozoriloProtiUtrujnosti: null,
+    laneAsist: null,
+    blindAsist: null,
+    nocniVidAsist: null,
+    tempomat: null,
+    sistemZaviranjaVsili: null,
+    zaznavanjePrometnihZnakov: null,
+    speljevanjeAsist: null,
+    sistemOpozorilaRazdalje: null,
+    AktivniTempomat: null,
+    dolgaLucAsist: null,
+    blutooth: null,
+    appleCarPlay: null,
+    androidAuto: null,
+    wifi: null,
+    alarmniSistem: null,
+    brezzicnoPolnjenjeTelefona: null,
+    headUp: null,
+    digitalniStevci: null,
+    panoramskaStreha: null,
+    ogrevanVolan: null,
+    ogrevaniSedeziSpredaj: null,
+    ogrevaniSedeziZadaj: null,
+    elektricnoNastavljivVoznikovSedez: null,
+    elektricnoNastavljivaSprednjaSedeza: null,
+    sportniSedezi: null,
+    sportniSedezi: null,
+    prezracevanaSprednjaSedeza: null,
+    prezracevaniVsiSedezi: null,
+    podporaZaLedveniDel: null,
+    masazniSedezi: null,
+    naslonjaloZaRoke: null,
+    vlecnaKljuka: null,
+    stresneSani: null,
+    samodejnoOdpiranjePrtljaznika: null,
+    sportnoVzmetenje: null,
+    zracnoVzmetenje: null,
+    nastavljivoVzmetenje: null,
+    senzorjiSpredaj: null,
+    senzorjiZadaj: null,
+    avtoParkiranjeAsist: null,
+    parkiranjeSPrikolicoAsist: null,
+    kameraZaVzvratnoVoznjo: null,
+    tristosestdesetKamera: null,
+    tristosestdesetSenzorji: null,
+    litaPlatisca: null,
+    aluPlatisca: null,
+    letnePnevmatike: null,
+    zimskePnevmatike: null,
+    celoletnePnevmatike: null,
+    sistemZaPopraviloKolesa: null,
+    rezervnoKolo: null,
+    runFlat: null,
+    senzorTlakaVPnevmatikah: null,
   };
+
+  constructor(props) {
+    super(props);
+    this.oprema = this.props.oprema;
+
+    this.categoriesOprema = [
+      'luci',
+      'varnostPotnikov',
+      'stabilizacija',
+      'klima',
+      'asistence',
+      'multimedija',
+      'notranja_oprema',
+      'sedezi',
+      'zunanja_oprema',
+      'podvozje_in_vzmetenje',
+      'parking',
+      'kolesa',
+    ];
+
+    this.objOprema = {
+      luci: this.luci,
+      varnostPotnikov: this.varnostPotnikov,
+      stabilizacija: this.stabilizacija,
+      klima: this.klima,
+      asistence: this.asistence,
+      multimedija: this.multimedija,
+      notranja_oprema: this.notranja_oprema,
+      sedezi: this.sedezi,
+      zunanja_oprema: this.zunanja_oprema,
+      podvozje_in_vzmetenje: this.podvozje_in_vzmetenje,
+      parking: this.parking,
+      kolesa: this.kolesa,
+    };
+
+    this.luci = [
+      'xenonZarometi',
+      'prilagodljiviZarometi',
+      'biXenon',
+      'meglenke',
+    ];
+    this.varnostPotnikov = ['zracneBlazine'];
+    this.stabilizacija = ['ABS', 'ESP', 'ASR', 'TCS'];
+    this.klima = [
+      'avtomatskaKlima',
+      'triConskaKlima',
+      'dvoConskaKlima',
+      'stiriConskaKlima',
+      'samodejnoOgrevanjeVozila',
+    ];
+    this.asistence = [
+      'SOSklicVsili',
+      'OpozoriloProtiUtrujnosti',
+      'laneAsist',
+      'blindAsist',
+      'nocniVidAsist',
+      'tempomat',
+      'sistemZaviranjaVsili',
+      'zaznavanjePrometnihZnakov',
+      'speljevanjeAsist',
+      'sistemOpozorilaRazdalje',
+      'AktivniTempomat',
+      'dolgaLucAsist',
+    ];
+    this.multimedija = ['blutooth', 'appleCarPlay', 'androidAuto', 'wifi'];
+    this.notranja_oprema = [
+      'alarmniSistem',
+      'brezzicnoPolnjenjeTelefona',
+      'headUp',
+      'digitalniStevci',
+      'panoramskaStreha',
+      'ogrevanVolan',
+    ];
+    this.sedezi = [
+      'ogrevaniSedeziSpredaj',
+      'ogrevaniSedeziZadaj',
+      'elektricnoNastavljivVoznikovSedez',
+      'elektricnoNastavljivaSprednjaSedeza',
+      'sportniSedezi',
+      'sportniSedezi',
+      'prezracevanaSprednjaSedeza',
+      'prezracevaniVsiSedezi',
+      'podporaZaLedveniDel',
+      'masazniSedezi',
+      'naslonjaloZaRoke',
+    ];
+    this.zunanja_oprema = [
+      'vlecnaKljuka',
+      'stresneSani',
+      'samodejnoOdpiranjePrtljaznika',
+    ];
+    this.podvozje_in_vzmetenje = [
+      'sportnoVzmetenje',
+      'zracnoVzmetenje',
+      'nastavljivoVzmetenje',
+    ];
+    this.parking = [
+      'senzorjiSpredaj',
+      'senzorjiZadaj',
+      'avtoParkiranjeAsist',
+      'parkiranjeSPrikolicoAsist',
+      'kameraZaVzvratnoVoznjo',
+      'tristosestdesetKamera',
+      'tristosestdesetSenzorji',
+    ];
+    this.kolesa = [
+      'litaPlatisca',
+      'aluPlatisca',
+      'letnePnevmatike',
+      'zimskePnevmatike',
+      'celoletnePnevmatike',
+      'sistemZaPopraviloKolesa',
+      'rezervnoKolo',
+      'runFlat',
+      'senzorTlakaVPnevmatikah',
+    ];
+  }
 
   componentDidMount() {
     if (this.props.primerjaj.length > 0) {
@@ -18,6 +217,210 @@ class SingleAdInList extends React.Component {
         });
       }
     }
+    this.categoriesOprema.forEach((item) => {
+      if (this.oprema.one.hasOwnProperty(item)) {
+        this.setState({
+          [item]: true,
+        });
+        if (item === 'luci') {
+          this.oprema.one.luci.forEach((item) => {
+            var val = this.luci[item];
+            this.setState({
+              [val]: true,
+            });
+          });
+        }
+        if (item === 'varnostPotnikov') {
+          this.oprema.one.varnostPotnikov.forEach((item) => {
+            var val = this.varnostPotnikov[item];
+            this.setState({
+              [val]: true,
+            });
+          });
+        }
+        if (item === 'stabilizacija') {
+          this.oprema.one.stabilizacija.forEach((item) => {
+            var val = this.stabilizacija[item];
+            this.setState({
+              [val]: true,
+            });
+          });
+        }
+        if (item === 'klima') {
+          this.oprema.one.klima.forEach((item) => {
+            var val = this.klima[item];
+            this.setState({
+              [val]: true,
+            });
+          });
+        }
+        if (item === 'asistence') {
+          this.oprema.one.asistence.forEach((item) => {
+            var val = this.asistence[item];
+            this.setState({
+              [val]: true,
+            });
+          });
+        }
+        if (item === 'multimedija') {
+          this.oprema.one.multimedija.forEach((item) => {
+            var val = this.multimedija[item];
+            this.setState({
+              [val]: true,
+            });
+          });
+        }
+        if (item === 'notranja_oprema') {
+          this.oprema.one.notranja_oprema.forEach((item) => {
+            var val = this.notranja_oprema[item];
+            this.setState({
+              [val]: true,
+            });
+          });
+        }
+        if (item === 'sedezi') {
+          this.oprema.one.sedezi.forEach((item) => {
+            var val = this.sedezi[item];
+            this.setState({
+              [val]: true,
+            });
+          });
+        }
+        if (item === 'zunanja_oprema') {
+          this.oprema.one.zunanja_oprema.forEach((item) => {
+            var val = this.zunanja_oprema[item];
+            this.setState({
+              [val]: true,
+            });
+          });
+        }
+        if (item === 'podvozje_in_vzmetenje') {
+          this.oprema.one.podvozje_in_vzmetenje.forEach((item) => {
+            var val = this.podvozje_in_vzmetenje[item];
+            this.setState({
+              [val]: true,
+            });
+          });
+        }
+        if (item === 'parking') {
+          this.oprema.one.parking.forEach((item) => {
+            var val = this.parking[item];
+            this.setState({
+              [val]: true,
+            });
+          });
+        }
+        if (item === 'kolesa') {
+          this.oprema.one.kolesa.forEach((item) => {
+            var val = this.kolesa[item];
+            this.setState({
+              [val]: true,
+            });
+          });
+        }
+      }
+      if (this.oprema.zero.hasOwnProperty(item)) {
+        this.setState({
+          [item]: true,
+        });
+        if (item === 'luci') {
+          this.oprema.zero.luci.forEach((item) => {
+            var val = this.luci[item];
+            this.setState({
+              [val]: false,
+            });
+          });
+        }
+        if (item === 'varnostPotnikov') {
+          this.oprema.zero.varnostPotnikov.forEach((item) => {
+            var val = this.varnostPotnikov[item];
+            this.setState({
+              [val]: false,
+            });
+          });
+        }
+        if (item === 'stabilizacija') {
+          this.oprema.zero.stabilizacija.forEach((item) => {
+            var val = this.stabilizacija[item];
+            this.setState({
+              [val]: false,
+            });
+          });
+        }
+        if (item === 'klima') {
+          this.oprema.zero.klima.forEach((item) => {
+            var val = this.klima[item];
+            this.setState({
+              [val]: false,
+            });
+          });
+        }
+        if (item === 'asistence') {
+          this.oprema.zero.asistence.forEach((item) => {
+            var val = this.asistence[item];
+            this.setState({
+              [val]: false,
+            });
+          });
+        }
+        if (item === 'multimedija') {
+          this.oprema.zero.multimedija.forEach((item) => {
+            var val = this.multimedija[item];
+            this.setState({
+              [val]: false,
+            });
+          });
+        }
+        if (item === 'notranja_oprema') {
+          this.oprema.zero.notranja_oprema.forEach((item) => {
+            var val = this.notranja_oprema[item];
+            this.setState({
+              [val]: false,
+            });
+          });
+        }
+        if (item === 'sedezi') {
+          this.oprema.zero.sedezi.forEach((item) => {
+            var val = this.sedezi[item];
+            this.setState({
+              [val]: false,
+            });
+          });
+        }
+        if (item === 'zunanja_oprema') {
+          this.oprema.zero.zunanja_oprema.forEach((item) => {
+            var val = this.zunanja_oprema[item];
+            this.setState({
+              [val]: false,
+            });
+          });
+        }
+        if (item === 'podvozje_in_vzmetenje') {
+          this.oprema.zero.podvozje_in_vzmetenje.forEach((item) => {
+            var val = this.podvozje_in_vzmetenje[item];
+            this.setState({
+              [val]: false,
+            });
+          });
+        }
+        if (item === 'parking') {
+          this.oprema.zero.parking.forEach((item) => {
+            var val = this.parking[item];
+            this.setState({
+              [val]: false,
+            });
+          });
+        }
+        if (item === 'kolesa') {
+          this.oprema.zero.kolesa.forEach((item) => {
+            var val = this.kolesa[item];
+            this.setState({
+              [val]: false,
+            });
+          });
+        }
+      }
+    });
   }
 
   componentDidUpdate(prevProps) {
@@ -66,7 +469,7 @@ class SingleAdInList extends React.Component {
   };
 
   render() {
-    //console.log('PROPS SINGLEAD_IN_LIST', this.props.favCompCD);
+    console.log('PROPS SINGLEAD_IN_LIST', this.state, this.props);
     return (
       <div className="comparison-container__item" key={this.props.key}>
         <div className="comparison-container__item--img">
@@ -159,134 +562,729 @@ class SingleAdInList extends React.Component {
           <div className="comparison-container__item--data--primerjavaData comparison-container__item--data--primerjavaData--opremaContainer">
             <h4>Oprema</h4>
             <div
-              className="comparison-container__item--data--primerjavaData--oprema"
-              id="firstOprema"
+              className={
+                this.state.luci
+                  ? `comparison-container__item--data--primerjavaData--oprema`
+                  : 'displayNone'
+              }
             >
               <h3>Luči</h3>
               <ul>
-                <li>Xenon žarometi: </li>
-                <li>Prilagodljivi žarometi: </li>
-                <li>Bi-Xenon žarometi: </li>
-                <li>Meglenke: </li>
+                <li
+                  className={
+                    this.state.xenonZarometi === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Xenon žarometi: {this.state.xenonZarometi ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.prilagodljiviZarometi === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Prilagodljivi žarometi:{' '}
+                  {this.state.prilagodljiviZarometi ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.biXenon === null ? 'displayNone' : 'noClass'
+                  }
+                >
+                  Bi-Xenon žarometi: {this.state.biXenon ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.meglenke === null ? 'displayNone' : 'noClass'
+                  }
+                >
+                  Meglenke: {this.state.meglenke ? 'Da' : 'Ne'}
+                </li>
               </ul>
             </div>
-            <div className="comparison-container__item--data--primerjavaData--oprema">
+            <div
+              className={
+                this.state.varnostPotnikov
+                  ? `comparison-container__item--data--primerjavaData--oprema`
+                  : 'displayNone'
+              }
+            >
               <h3>Varnost potnikov</h3>
               <ul>
-                <li>Zračne blazine: </li>
+                <li
+                  className={
+                    this.state.zracneBlazine === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Zračne blazine: {this.state.zracneBlazine ? 'Da' : 'Ne'}
+                </li>
               </ul>
             </div>
-            <div className="comparison-container__item--data--primerjavaData--oprema">
+            <div
+              className={
+                this.state.stabilizacija
+                  ? `comparison-container__item--data--primerjavaData--oprema`
+                  : 'displayNone'
+              }
+            >
               <h3>Stabilizacija vozila</h3>
               <ul>
-                <li>ABS: </li>
-                <li>ESP: </li>
-                <li>ASR: </li>
-                <li>TCS: </li>
+                <li
+                  className={
+                    this.state.ABS === null ? 'displayNone' : 'noClass'
+                  }
+                >
+                  ABS: {this.state.ABS ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.ESP === null ? 'displayNone' : 'noClass'
+                  }
+                >
+                  ESP: {this.state.ESP ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.ASR === null ? 'displayNone' : 'noClass'
+                  }
+                >
+                  ASR: {this.state.ASR ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.TCS === null ? 'displayNone' : 'noClass'
+                  }
+                >
+                  TCS: {this.state.TCS ? 'Da' : 'Ne'}
+                </li>
               </ul>
             </div>
-            <div className="comparison-container__item--data--primerjavaData--oprema">
+            <div
+              className={
+                this.state.klima
+                  ? `comparison-container__item--data--primerjavaData--oprema`
+                  : 'displayNone'
+              }
+            >
               <h3>Klima</h3>
               <ul>
-                <li>Avtomatska klima: </li>
-                <li>2-conska klima: </li>
-                <li>3-conska klima: </li>
-                <li>4-conska klima: </li>
-                <li>Samodejno ogrevanje vozila: </li>
+                <li
+                  className={
+                    this.state.avtomatskaKlima === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Avtomatska klima: {this.state.avtomatskaKlima ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.dvoConskaKlima === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  2-conska klima: {this.state.dvoConskaKlima ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.triConskaKlima === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  3-conska klima: {this.state.triConskaKlima ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.stiriConskaKlima === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  4-conska klima: {this.state.stiriConskaKlima ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.samodejnoOgrevanjeVozila === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Samodejno ogrevanje vozila:{' '}
+                  {this.state.samodejnoOgrevanjeVozila ? 'Da' : 'Ne'}
+                </li>
               </ul>
             </div>
-            <div className="comparison-container__item--data--primerjavaData--oprema">
+            <div
+              className={
+                this.state.asistence
+                  ? `comparison-container__item--data--primerjavaData--oprema`
+                  : 'displayNone'
+              }
+            >
               <h3>Asistence</h3>
               <ul>
-                <li>SOS: </li>
-                <li>Opozorilo proti utrujenosti: </li>
-                <li>Lane asistenca: </li>
-                <li>Blind asistenca: </li>
-                <li>Asistenca nočnega vid: </li>
-                <li>Tempomat: </li>
-                <li>Aktivni tempomat: </li>
-                <li>Sistem zaviranja v sili: </li>
-                <li>Zaznavanje prometnih znakov: </li>
-                <li>Asistenca pri speljevanju: </li>
-                <li>Sistem opozorila razdalje: </li>
-                <li>Asistenca dolge luči: </li>
+                <li
+                  className={
+                    this.state.SOSklicVsili === null ? 'displayNone' : 'noClass'
+                  }
+                >
+                  SOS: {this.state.SOSklicVsili ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.OpozoriloProtiUtrujnosti === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Opozorilo proti utrujenosti:{' '}
+                  {this.state.OpozoriloProtiUtrujnosti ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.laneAsist === null ? 'displayNone' : 'noClass'
+                  }
+                >
+                  Lane asistenca: {this.state.laneAsist ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.blindAsist === null ? 'displayNone' : 'noClass'
+                  }
+                >
+                  Blind asistenca: {this.state.blindAsist ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.nocniVidAsist === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Asistenca nočnega vid:{' '}
+                  {this.state.nocniVidAsist ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.tempomat === null ? 'displayNone' : 'noClass'
+                  }
+                >
+                  Tempomat: {this.state.tempomat ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.AktivniTempomat === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Aktivni tempomat: {this.state.AktivniTempomat ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.sistemZaviranjaVsili === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Sistem zaviranja v sili:{' '}
+                  {this.state.sistemZaviranjaVsili ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.zaznavanjePrometnihZnakov === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Zaznavanje prometnih znakov:{' '}
+                  {this.state.zaznavanjePrometnihZnakov ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.speljevanjeAsist === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Asistenca pri speljevanju:{' '}
+                  {this.state.speljevanjeAsist ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.sistemOpozorilaRazdalje === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Sistem opozorila razdalje:{' '}
+                  {this.state.sistemOpozorilaRazdalje ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.dolgaLucAsist === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Asistenca dolge luči: {this.state.dolgaLucAsist ? 'Da' : 'Ne'}
+                </li>
               </ul>
             </div>
-            <div className="comparison-container__item--data--primerjavaData--oprema">
+            <div
+              className={
+                this.state.multimedija
+                  ? `comparison-container__item--data--primerjavaData--oprema`
+                  : 'displayNone'
+              }
+            >
               <h3>Multimedija</h3>
               <ul>
-                <li>Blutooth: </li>
-                <li>Apple Car Play: </li>
-                <li>Android Auto: </li>
-                <li>Wifi: </li>
+                <li
+                  className={
+                    this.state.blutooth === null ? 'displayNone' : 'noClass'
+                  }
+                >
+                  Blutooth: {this.state.blutooth ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.appleCarPlay === null ? 'displayNone' : 'noClass'
+                  }
+                >
+                  Apple Car Play: {this.state.appleCarPlay ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.androidAuto === null ? 'displayNone' : 'noClass'
+                  }
+                >
+                  Android Auto: {this.state.androidAuto ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.wifi === null ? 'displayNone' : 'noClass'
+                  }
+                >
+                  Wifi: {this.state.wifi ? 'Da' : 'Ne'}
+                </li>
               </ul>
             </div>
-            <div className="comparison-container__item--data--primerjavaData--oprema">
+            <div
+              className={
+                this.state.notranja_oprema
+                  ? `comparison-container__item--data--primerjavaData--oprema`
+                  : 'displayNone'
+              }
+            >
               <h3>Notranja oprema</h3>
               <ul>
-                <li>Alarmni sistem: </li>
-                <li>Brezžično polnjenje telefona: </li>
-                <li>Head-up: </li>
-                <li>Digitalni števci: </li>
-                <li>Panoramska streha: </li>
-                <li>Ogrevan volan: </li>
+                <li
+                  className={
+                    this.state.alarmniSistem === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Alarmni sistem: {this.state.alarmniSistem ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.brezzicnoPolnjenjeTelefona === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Brezžično polnjenje telefona:{' '}
+                  {this.state.brezzicnoPolnjenjeTelefona ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.headUp === null ? 'displayNone' : 'noClass'
+                  }
+                >
+                  Head-up: {this.state.headUp ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.digitalniStevci === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Digitalni števci: {this.state.digitalniStevci ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.panoramskaStreha === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Panoramska streha: {this.state.panoramskaStreha ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.ogrevanVolan === null ? 'displayNone' : 'noClass'
+                  }
+                >
+                  Ogrevan volan: {this.state.ogrevanVolan ? 'Da' : 'Ne'}
+                </li>
               </ul>
             </div>
-            <div className="comparison-container__item--data--primerjavaData--oprema">
+            <div
+              className={
+                this.state.zunanja_oprema
+                  ? `comparison-container__item--data--primerjavaData--oprema`
+                  : 'displayNone'
+              }
+            >
               <h3>Zunanja oprema</h3>
               <ul>
-                <li>Vlečna kljuka: </li>
-                <li>Strešne sani: </li>
-                <li>Samodejno odpiranje prtljažnika: </li>
+                <li
+                  className={
+                    this.state.vlecnaKljuka === null ? 'displayNone' : 'noClass'
+                  }
+                >
+                  Vlečna kljuka: {this.state.vlecnaKljuka ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.stresneSani === null ? 'displayNone' : 'noClass'
+                  }
+                >
+                  Strešne sani: {this.state.stresneSani ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.samodejnoOdpiranjePrtljaznika === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Samodejno odpiranje prtljažnika:{' '}
+                  {this.state.samodejnoOdpiranjePrtljaznika ? 'Da' : 'Ne'}
+                </li>
               </ul>
             </div>
-            <div className="comparison-container__item--data--primerjavaData--oprema">
+            <div
+              className={
+                this.state.sedezi
+                  ? `comparison-container__item--data--primerjavaData--oprema`
+                  : 'displayNone'
+              }
+            >
               <h3>Sedeži</h3>
               <ul>
-                <li>Ogrevani sedeži spredaj: </li>
-                <li>Ogrevani sedeži zadaj: </li>
-                <li>Električno nastavljiv voznikov sedež: </li>
-                <li>Električno nastavljiva sprednja sedeža: </li>
-                <li>Športni sedeži: </li>
-                <li>Prezračevana sprednja sedeža: </li>
-                <li>Prezračevani vsi sedeži: </li>
-                <li>Podpora za ledveni del: </li>
-                <li>Masažni sedeži: </li>
-                <li>Naslonjalo za roke: </li>
+                <li
+                  className={
+                    this.state.ogrevaniSedeziSpredaj === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Ogrevani sedeži spredaj:{' '}
+                  {this.state.ogrevaniSedeziSpredaj ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.ogrevaniSedeziZadaj === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Ogrevani sedeži zadaj:{' '}
+                  {this.state.ogrevaniSedeziZadaj ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.elektricnoNastavljivVoznikovSedez === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Električno nastavljiv voznikov sedež:{' '}
+                  {this.state.elektricnoNastavljivVoznikovSedez ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.elektricnoNastavljivaSprednjaSedeza === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Električno nastavljiva sprednja sedeža:{' '}
+                  {this.state.elektricnoNastavljivaSprednjaSedeza ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.sportniSedezi === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Športni sedeži: {this.state.sportniSedezi ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.prezracevanaSprednjaSedeza === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Prezračevana sprednja sedeža:{' '}
+                  {this.state.prezracevanaSprednjaSedeza ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.prezracevaniVsiSedezi === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Prezračevani vsi sedeži:{' '}
+                  {this.state.prezracevaniVsiSedezi ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.podporaZaLedveniDel === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Podpora za ledveni del:{' '}
+                  {this.state.podporaZaLedveniDel ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.masazniSedezi === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Masažni sedeži: {this.state.masazniSedezi ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.naslonjaloZaRoke === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Naslonjalo za roke:{' '}
+                  {this.state.naslonjaloZaRoke ? 'Da' : 'Ne'}
+                </li>
               </ul>
             </div>
-            <div className="comparison-container__item--data--primerjavaData--oprema">
+            <div
+              className={
+                this.state.podvozje_in_vzmetenje
+                  ? `comparison-container__item--data--primerjavaData--oprema`
+                  : 'displayNone'
+              }
+            >
               <h3>Podvozje in vzmetenje</h3>
               <ul>
-                <li>Športno vzmetenje: </li>
-                <li>Zračno vzmetenje: </li>
-                <li>Nastavljivo vzmetenje: </li>
+                <li
+                  className={
+                    this.state.sportnoVzmetenje === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Športno vzmetenje: {this.state.sportnoVzmetenje ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.zracnoVzmetenje === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Zračno vzmetenje: {this.state.zracnoVzmetenje ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.nastavljivoVzmetenje === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Nastavljivo vzmetenje:{' '}
+                  {this.state.nastavljivoVzmetenje ? 'Da' : 'Ne'}
+                </li>
               </ul>
             </div>
-            <div className="comparison-container__item--data--primerjavaData--oprema">
+            <div
+              className={
+                this.state.parking
+                  ? `comparison-container__item--data--primerjavaData--oprema`
+                  : 'displayNone'
+              }
+            >
               <h3>Parking</h3>
               <ul>
-                <li>Senzorji spredaj: </li>
-                <li>Senzorji zadaj: </li>
-                <li>Asistenca avtomatskega parkiranja: </li>
-                <li>Asistenca parkiranja s prikolico: </li>
-                <li>Kamera za vzvratno vožnjo: </li>
-                <li>Kamera 360°: </li>
-                <li>Senzorji 360°: </li>
+                <li
+                  className={
+                    this.state.senzorjiSpredaj === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Senzorji spredaj: {this.state.senzorjiSpredaj ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.senzorjiZadaj === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Senzorji zadaj: {this.state.senzorjiZadaj ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.avtoParkiranjeAsist === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Asistenca avtomatskega parkiranja:{' '}
+                  {this.state.avtoParkiranjeAsist ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.parkiranjeSPrikolicoAsist === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Asistenca parkiranja s prikolico:{' '}
+                  {this.state.parkiranjeSPrikolicoAsist ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.kameraZaVzvratnoVoznjo === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Kamera za vzvratno vožnjo:{' '}
+                  {this.state.kameraZaVzvratnoVoznjo ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.tristosestdesetKamera === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Kamera 360°: {this.state.tristosestdesetKamera ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.tristosestdesetSenzorji === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Senzorji 360°:{' '}
+                  {this.state.tristosestdesetSenzorji ? 'Da' : 'Ne'}
+                </li>
               </ul>
             </div>
-            <div className="comparison-container__item--data--primerjavaData--oprema">
+            <div
+              className={
+                this.state.kolesa
+                  ? `comparison-container__item--data--primerjavaData--oprema`
+                  : 'displayNone'
+              }
+            >
               <h3>Kolesa</h3>
               <ul>
-                <li>Lita platišča: </li>
-                <li>Alu platišča: </li>
-                <li>Letne pnevmatike: </li>
-                <li>Zimske pnevmatike: </li>
-                <li>Celoletne pnevmatike: </li>
-                <li>Sistem za popravilo koles: </li>
-                <li>Rezervno kolo: </li>
-                <li>Run-flat: </li>
-                <li>Senzor tlaka v pnevmatikah: </li>
+                <li
+                  className={
+                    this.state.litaPlatisca === null ? 'displayNone' : 'noClass'
+                  }
+                >
+                  Lita platišča: {this.state.litaPlatisca ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.aluPlatisca === null ? 'displayNone' : 'noClass'
+                  }
+                >
+                  Alu platišča: {this.state.aluPlatisca ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.letnePnevmatike === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Letne pnevmatike: {this.state.letnePnevmatike ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.zimskePnevmatike === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Zimske pnevmatike: {this.state.zimskePnevmatike ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.celoletnePnevmatike === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Celoletne pnevmatike:{' '}
+                  {this.state.celoletnePnevmatike ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.sistemZaPopraviloKolesa === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Sistem za popravilo koles:{' '}
+                  {this.state.sistemZaPopraviloKolesa ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.rezervnoKolo === null ? 'displayNone' : 'noClass'
+                  }
+                >
+                  Rezervno kolo: {this.state.rezervnoKolo ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.runFlat === null ? 'displayNone' : 'noClass'
+                  }
+                >
+                  Run-flat: {this.state.runFlat ? 'Da' : 'Ne'}
+                </li>
+                <li
+                  className={
+                    this.state.senzorTlakaVPnevmatikah === null
+                      ? 'displayNone'
+                      : 'noClass'
+                  }
+                >
+                  Senzor tlaka v pnevmatikah:{' '}
+                  {this.state.senzorTlakaVPnevmatikah ? 'Da' : 'Ne'}
+                </li>
               </ul>
             </div>
           </div>
