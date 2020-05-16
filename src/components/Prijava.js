@@ -4,6 +4,10 @@ import { Redirect } from 'react-router-dom';
 import { registerUser, loginUser, pozabilGesloUser } from '../actions/index';
 import { connect } from 'react-redux';
 import '../scss/Prijava.scss';
+import '../scss/displayNone.scss';
+import '../scss/loader.scss';
+
+import Loader from '../utils/Loader';
 
 class Prijava extends Component {
   state = {
@@ -21,6 +25,7 @@ class Prijava extends Component {
     msg: '',
     pozabilGeslo: false,
     green: false,
+    loading: false,
   };
 
   componentDidMount() {
@@ -28,7 +33,7 @@ class Prijava extends Component {
     //this.props.loginUser();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (this.props.userData !== prevProps.userData) {
       let arr = {};
       if (this.props.userData && this.props.userData.userLogin) {
@@ -36,11 +41,13 @@ class Prijava extends Component {
           this.setState({
             msgLogin: this.props.userData.userLogin.message,
             green: true,
+            loading: false,
           });
         } else {
           this.setState({
             msgLogin: this.props.userData.userLogin.message,
             green: false,
+            loading: false,
           });
         }
       }
@@ -49,11 +56,13 @@ class Prijava extends Component {
           this.setState({
             msgReg: this.props.userData.userReg.message,
             green: true,
+            loading: false,
           });
         } else {
           this.setState({
             msgReg: this.props.userData.userReg.message,
             green: false,
+            loading: false,
           });
         }
       }
@@ -64,11 +73,13 @@ class Prijava extends Component {
         this.setState({
           msg: this.props.userData.pozabilGeslo.message,
           green: true,
+          loading: false,
         });
       } else if (this.props.userData.pozabilGeslo.success === 0) {
         this.setState({
           msg: this.props.userData.pozabilGeslo.message,
           green: false,
+          loading: false,
         });
       }
     }
@@ -84,6 +95,12 @@ class Prijava extends Component {
   };
 
   handleSubmit = (e) => {
+    this.setState({
+      loading: true,
+      msgLogin: '',
+      msgReg: '',
+      msg: '',
+    });
     e.preventDefault();
     let list = e.target.getElementsByTagName('input');
     var arr = [...list];
@@ -238,6 +255,7 @@ class Prijava extends Component {
                 : null}
             </p>
             <input
+              className={this.state.loading && 'displayNone'}
               data-info={
                 this.state.reg && this.state.pozabilGeslo === false
                   ? 'reg'
@@ -256,6 +274,13 @@ class Prijava extends Component {
                   : 'Ponastavi geslo'
               }
             />
+            <div
+              className={this.state.loading ? 'loaderPrijava' : 'displayNone'}
+            >
+              <span>
+                <Loader />
+              </span>
+            </div>
             <p onClick={this.handlePozabilGeslo} id="pozabilGeslo">
               {this.state.reg === false &&
                 this.state.pozabilGeslo === false &&

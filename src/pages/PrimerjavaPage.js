@@ -7,6 +7,7 @@ import SingleAdIdComparison from '../components/SingleAdInComparison';
 import '../scss/ComparisonPage.scss';
 import '../scss/displayNone.scss';
 import '../scss/Comparison.scss';
+import Loader from '../utils/Loader';
 
 class PrimerjavaPage extends Component {
   state = {
