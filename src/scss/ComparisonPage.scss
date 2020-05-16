@@ -1,0 +1,9 @@
+.comparisonPage {
+  &__zero {
+    grid-column: 1 / -1;
+    justify-self: center;
+    margin-top: 10rem;
+    font-size: 2rem;
+    margin-bottom: 80vh;
+  }
+}

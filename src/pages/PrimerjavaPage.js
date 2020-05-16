@@ -3,9 +3,8 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getComparison, fetchOneAd, dodajMedPrimerjaj } from '../actions';
 import SingleAdIdComparison from '../components/SingleAdInComparison';
-import _ from 'lodash';
 
-import '../scss/Favourites.scss';
+import '../scss/ComparisonPage.scss';
 import '../scss/displayNone.scss';
 import '../scss/Comparison.scss';
 
@@ -13,8 +12,9 @@ class PrimerjavaPage extends Component {
   state = {
     comp: [],
     compAds: [],
-    twoArrays: [],
+    renderArrays: [],
     trigger: [],
+    triggerSecond: [],
   };
 
   constructor(props) {
@@ -22,6 +22,7 @@ class PrimerjavaPage extends Component {
 
     this.obj1 = {};
     this.obj2 = {};
+    this.obj3 = {};
     this.newArr = [];
   }
 
@@ -74,7 +75,11 @@ class PrimerjavaPage extends Component {
       prevState.compAds.length !== this.state.compAds.length ||
       this.state.compAds.length > 0
     ) {
-      this.renderJSONarray();
+      if (this.state.comp.length === 2) {
+        this.renderJSONarray(2);
+      } else if (this.state.comp.length === 3) {
+        this.renderJSONarray(3);
+      }
     }
     /*  if (
       prevState.twoArrays.length !== this.state.twoArrays.length ||
@@ -97,7 +102,7 @@ class PrimerjavaPage extends Component {
     return true;
   };
 
-  renderJSONarray = () => {
+  renderJSONarray = (len) => {
     var arr = [];
     for (var i = 0; i < this.state.compAds.length; i++) {
       arr.push(JSON.parse(this.state.compAds[i].oprema));
@@ -119,24 +124,51 @@ class PrimerjavaPage extends Component {
       'parking',
       'kolesa',
     ];
-
-    if (arr.length === 2) {
-      if (typeof arr[1][arr[1].length - 1] !== 'string') {
-        for (var k = 0; k < arr[0].length; k++) {
-          this.newArr = [
-            ...this.compareTwoArrays(arr[0][k], arr[1][k], list[k]),
-          ];
+    if (len === 2) {
+      if (arr.length === 2) {
+        if (typeof arr[1][arr[1].length - 1] !== 'string') {
+          for (var k = 0; k < arr[0].length; k++) {
+            this.newArr = [
+              ...this.compareTwoArrays(arr[0][k], arr[1][k], list[k]),
+            ];
+          }
         }
       }
+      if (this.newArr.length === 2 && this.state.trigger.length === 0) {
+        this.setState({
+          trigger: this.newArr,
+          renderArrays: [
+            { ...this.state.compAds[0], oprema: this.newArr[0] },
+            { ...this.state.compAds[1], oprema: this.newArr[1] },
+          ],
+        });
+      }
     }
-    if (this.newArr.length === 2 && this.state.trigger.length === 0) {
-      this.setState({
-        trigger: this.newArr,
-        twoArrays: [
-          { ...this.state.compAds[0], oprema: this.newArr[0] },
-          { ...this.state.compAds[1], oprema: this.newArr[1] },
-        ],
-      });
+    if (len === 3) {
+      if (arr.length === 3) {
+        if (typeof arr[2][arr[2].length - 1] !== 'string') {
+          for (var k = 0; k < arr[0].length; k++) {
+            this.newArr = [
+              ...this.compareThreeArrays(
+                arr[0][k],
+                arr[1][k],
+                arr[2][k],
+                list[k]
+              ),
+            ];
+          }
+        }
+      }
+      if (this.newArr.length === 3 && this.state.triggerSecond.length === 0) {
+        this.setState({
+          triggerSecond: this.newArr,
+          renderArrays: [
+            { ...this.state.compAds[0], oprema: this.newArr[0] },
+            { ...this.state.compAds[1], oprema: this.newArr[1] },
+            { ...this.state.compAds[2], oprema: this.newArr[2] },
+          ],
+        });
+      }
     }
   };
 
@@ -178,6 +210,88 @@ class PrimerjavaPage extends Component {
     return [this.obj1, this.obj2];
   };
 
+  compareThreeArrays = (array1, array2, array3, ime) => {
+    var arr1 = array1;
+    var arr2 = array2;
+    var arr3 = array3;
+    var newArrTrue1 = [];
+    var newArrTrue2 = [];
+    var newArrTrue3 = [];
+    var newArrFalse1 = [];
+    var newArrFalse2 = [];
+    var newArrFalse3 = [];
+
+    for (var i = 0; i < arr1.length; i++) {
+      if (
+        (arr1[i] === arr2[i] && arr1[i] === 1 && arr3[i] === 0) ||
+        (arr1[i] === arr3[i] && arr1[i] === 1 && arr2[i] === 0) ||
+        (arr1[i] === 1 && arr2[i] === 0 && arr3[i] === 0) ||
+        (arr1[i] === arr2[i] && arr1[i] === arr3[i] && arr1[i] === 1)
+      ) {
+        newArrTrue1.push(i);
+        this.obj1 = {
+          ...this.obj1,
+          one: { ...this.obj1.one, [ime]: newArrTrue1 },
+        };
+      }
+      if (
+        (arr1[i] === 0 && arr2[i] === 1) ||
+        (arr1[i] === 0 && arr3[i] === 1)
+      ) {
+        newArrFalse1.push(i);
+        this.obj1 = {
+          ...this.obj1,
+          zero: { ...this.obj1.zero, [ime]: newArrFalse1 },
+        };
+      }
+      if (
+        (arr2[i] === arr1[i] && arr2[i] === 1 && arr3[i] === 0) ||
+        (arr2[i] === arr3[i] && arr2[i] === 1 && arr1[i] === 0) ||
+        (arr2[i] === 1 && arr1[i] === 0 && arr3[i] === 0) ||
+        (arr1[i] === arr2[i] && arr1[i] === arr3[i] && arr1[i] === 1)
+      ) {
+        newArrTrue2.push(i);
+        this.obj2 = {
+          ...this.obj2,
+          one: { ...this.obj2.one, [ime]: newArrTrue2 },
+        };
+      }
+      if (
+        (arr2[i] === 0 && arr1[i] === 1) ||
+        (arr2[i] === 0 && arr3[i] === 1)
+      ) {
+        newArrFalse2.push(i);
+        this.obj2 = {
+          ...this.obj2,
+          zero: { ...this.obj2.zero, [ime]: newArrFalse2 },
+        };
+      }
+      if (
+        (arr3[i] === arr1[i] && arr3[i] === 1 && arr2[i] === 0) ||
+        (arr3[i] === arr2[i] && arr3[i] === 1 && arr1[i] === 0) ||
+        (arr3[i] === 1 && arr1[i] === 0 && arr2[i] === 0) ||
+        (arr1[i] === arr2[i] && arr1[i] === arr3[i] && arr1[i] === 1)
+      ) {
+        newArrTrue3.push(i);
+        this.obj3 = {
+          ...this.obj3,
+          one: { ...this.obj3.one, [ime]: newArrTrue3 },
+        };
+      }
+      if (
+        (arr3[i] === 0 && arr1[i] === 1) ||
+        (arr3[i] === 0 && arr2[i] === 1)
+      ) {
+        newArrFalse3.push(i);
+        this.obj3 = {
+          ...this.obj3,
+          zero: { ...this.obj3.zero, [ime]: newArrFalse3 },
+        };
+      }
+    }
+    return [this.obj1, this.obj2, this.obj3];
+  };
+
   render() {
     console.log('#######PRIMERJAVA', this.state, this.props);
     if (
@@ -186,10 +300,12 @@ class PrimerjavaPage extends Component {
     )
       return <Redirect to="/" />;
     return (
-      <div className="favourites">
+      <div className="comparisonPage">
         <p
           className={
-            this.state.compAds.length === 0 ? 'favourites__zero' : 'displayNone'
+            this.state.compAds.length === 0
+              ? 'comparisonPage__zero'
+              : 'displayNone'
           }
         >
           Za primerjavo niste izbrali še nobenih vozil.
@@ -201,7 +317,7 @@ class PrimerjavaPage extends Component {
               : 'displayNone'
           }
         >
-          {this.state.twoArrays.map((item) => {
+          {this.state.renderArrays.map((item) => {
             console.log('OPREMA', item);
             return (
               <SingleAdIdComparison

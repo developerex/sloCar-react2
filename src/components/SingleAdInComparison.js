@@ -93,7 +93,6 @@ class SingleAdInList extends React.Component {
 
   constructor(props) {
     super(props);
-    this.oprema = this.props.oprema;
 
     this.categoriesOprema = [
       'luci',
@@ -218,12 +217,12 @@ class SingleAdInList extends React.Component {
       }
     }
     this.categoriesOprema.forEach((item) => {
-      if (this.oprema.one.hasOwnProperty(item)) {
+      if (this.props.oprema.one.hasOwnProperty(item)) {
         this.setState({
           [item]: true,
         });
         if (item === 'luci') {
-          this.oprema.one.luci.forEach((item) => {
+          this.props.oprema.one.luci.forEach((item) => {
             var val = this.luci[item];
             this.setState({
               [val]: true,
@@ -231,7 +230,7 @@ class SingleAdInList extends React.Component {
           });
         }
         if (item === 'varnostPotnikov') {
-          this.oprema.one.varnostPotnikov.forEach((item) => {
+          this.props.oprema.one.varnostPotnikov.forEach((item) => {
             var val = this.varnostPotnikov[item];
             this.setState({
               [val]: true,
@@ -239,7 +238,7 @@ class SingleAdInList extends React.Component {
           });
         }
         if (item === 'stabilizacija') {
-          this.oprema.one.stabilizacija.forEach((item) => {
+          this.props.oprema.one.stabilizacija.forEach((item) => {
             var val = this.stabilizacija[item];
             this.setState({
               [val]: true,
@@ -247,7 +246,7 @@ class SingleAdInList extends React.Component {
           });
         }
         if (item === 'klima') {
-          this.oprema.one.klima.forEach((item) => {
+          this.props.oprema.one.klima.forEach((item) => {
             var val = this.klima[item];
             this.setState({
               [val]: true,
@@ -255,7 +254,7 @@ class SingleAdInList extends React.Component {
           });
         }
         if (item === 'asistence') {
-          this.oprema.one.asistence.forEach((item) => {
+          this.props.oprema.one.asistence.forEach((item) => {
             var val = this.asistence[item];
             this.setState({
               [val]: true,
@@ -263,7 +262,7 @@ class SingleAdInList extends React.Component {
           });
         }
         if (item === 'multimedija') {
-          this.oprema.one.multimedija.forEach((item) => {
+          this.props.oprema.one.multimedija.forEach((item) => {
             var val = this.multimedija[item];
             this.setState({
               [val]: true,
@@ -271,7 +270,7 @@ class SingleAdInList extends React.Component {
           });
         }
         if (item === 'notranja_oprema') {
-          this.oprema.one.notranja_oprema.forEach((item) => {
+          this.props.oprema.one.notranja_oprema.forEach((item) => {
             var val = this.notranja_oprema[item];
             this.setState({
               [val]: true,
@@ -279,7 +278,7 @@ class SingleAdInList extends React.Component {
           });
         }
         if (item === 'sedezi') {
-          this.oprema.one.sedezi.forEach((item) => {
+          this.props.oprema.one.sedezi.forEach((item) => {
             var val = this.sedezi[item];
             this.setState({
               [val]: true,
@@ -287,7 +286,7 @@ class SingleAdInList extends React.Component {
           });
         }
         if (item === 'zunanja_oprema') {
-          this.oprema.one.zunanja_oprema.forEach((item) => {
+          this.props.oprema.one.zunanja_oprema.forEach((item) => {
             var val = this.zunanja_oprema[item];
             this.setState({
               [val]: true,
@@ -295,7 +294,7 @@ class SingleAdInList extends React.Component {
           });
         }
         if (item === 'podvozje_in_vzmetenje') {
-          this.oprema.one.podvozje_in_vzmetenje.forEach((item) => {
+          this.props.oprema.one.podvozje_in_vzmetenje.forEach((item) => {
             var val = this.podvozje_in_vzmetenje[item];
             this.setState({
               [val]: true,
@@ -303,7 +302,7 @@ class SingleAdInList extends React.Component {
           });
         }
         if (item === 'parking') {
-          this.oprema.one.parking.forEach((item) => {
+          this.props.oprema.one.parking.forEach((item) => {
             var val = this.parking[item];
             this.setState({
               [val]: true,
@@ -311,7 +310,7 @@ class SingleAdInList extends React.Component {
           });
         }
         if (item === 'kolesa') {
-          this.oprema.one.kolesa.forEach((item) => {
+          this.props.oprema.one.kolesa.forEach((item) => {
             var val = this.kolesa[item];
             this.setState({
               [val]: true,
@@ -319,12 +318,13 @@ class SingleAdInList extends React.Component {
           });
         }
       }
-      if (this.oprema.zero.hasOwnProperty(item)) {
+      if (this.props.oprema.zero.hasOwnProperty(item)) {
+        console.log('CENA', this.props.cena, 'ITEM: ', item);
         this.setState({
           [item]: true,
         });
         if (item === 'luci') {
-          this.oprema.zero.luci.forEach((item) => {
+          this.props.oprema.zero.luci.forEach((item) => {
             var val = this.luci[item];
             this.setState({
               [val]: false,
@@ -332,7 +332,7 @@ class SingleAdInList extends React.Component {
           });
         }
         if (item === 'varnostPotnikov') {
-          this.oprema.zero.varnostPotnikov.forEach((item) => {
+          this.props.oprema.zero.varnostPotnikov.forEach((item) => {
             var val = this.varnostPotnikov[item];
             this.setState({
               [val]: false,
@@ -340,7 +340,7 @@ class SingleAdInList extends React.Component {
           });
         }
         if (item === 'stabilizacija') {
-          this.oprema.zero.stabilizacija.forEach((item) => {
+          this.props.oprema.zero.stabilizacija.forEach((item) => {
             var val = this.stabilizacija[item];
             this.setState({
               [val]: false,
@@ -348,7 +348,7 @@ class SingleAdInList extends React.Component {
           });
         }
         if (item === 'klima') {
-          this.oprema.zero.klima.forEach((item) => {
+          this.props.oprema.zero.klima.forEach((item) => {
             var val = this.klima[item];
             this.setState({
               [val]: false,
@@ -356,7 +356,7 @@ class SingleAdInList extends React.Component {
           });
         }
         if (item === 'asistence') {
-          this.oprema.zero.asistence.forEach((item) => {
+          this.props.oprema.zero.asistence.forEach((item) => {
             var val = this.asistence[item];
             this.setState({
               [val]: false,
@@ -364,7 +364,7 @@ class SingleAdInList extends React.Component {
           });
         }
         if (item === 'multimedija') {
-          this.oprema.zero.multimedija.forEach((item) => {
+          this.props.oprema.zero.multimedija.forEach((item) => {
             var val = this.multimedija[item];
             this.setState({
               [val]: false,
@@ -372,7 +372,7 @@ class SingleAdInList extends React.Component {
           });
         }
         if (item === 'notranja_oprema') {
-          this.oprema.zero.notranja_oprema.forEach((item) => {
+          this.props.oprema.zero.notranja_oprema.forEach((item) => {
             var val = this.notranja_oprema[item];
             this.setState({
               [val]: false,
@@ -380,7 +380,7 @@ class SingleAdInList extends React.Component {
           });
         }
         if (item === 'sedezi') {
-          this.oprema.zero.sedezi.forEach((item) => {
+          this.props.oprema.zero.sedezi.forEach((item) => {
             var val = this.sedezi[item];
             this.setState({
               [val]: false,
@@ -388,7 +388,7 @@ class SingleAdInList extends React.Component {
           });
         }
         if (item === 'zunanja_oprema') {
-          this.oprema.zero.zunanja_oprema.forEach((item) => {
+          this.props.oprema.zero.zunanja_oprema.forEach((item) => {
             var val = this.zunanja_oprema[item];
             this.setState({
               [val]: false,
@@ -396,7 +396,7 @@ class SingleAdInList extends React.Component {
           });
         }
         if (item === 'podvozje_in_vzmetenje') {
-          this.oprema.zero.podvozje_in_vzmetenje.forEach((item) => {
+          this.props.oprema.zero.podvozje_in_vzmetenje.forEach((item) => {
             var val = this.podvozje_in_vzmetenje[item];
             this.setState({
               [val]: false,
@@ -404,7 +404,7 @@ class SingleAdInList extends React.Component {
           });
         }
         if (item === 'parking') {
-          this.oprema.zero.parking.forEach((item) => {
+          this.props.oprema.zero.parking.forEach((item) => {
             var val = this.parking[item];
             this.setState({
               [val]: false,
@@ -412,7 +412,7 @@ class SingleAdInList extends React.Component {
           });
         }
         if (item === 'kolesa') {
-          this.oprema.zero.kolesa.forEach((item) => {
+          this.props.oprema.zero.kolesa.forEach((item) => {
             var val = this.kolesa[item];
             this.setState({
               [val]: false,
