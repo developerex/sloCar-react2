@@ -9,6 +9,7 @@ import {
 } from '../actions';
 
 import '../scss/list/AdList.scss';
+import '../scss/displayNone.scss';
 import { Link } from 'react-router-dom';
 import AdListSidebarLeft from './AdListSidebarLeft';
 import AdListSidebarRight from './AdListSidebarRight';
@@ -124,10 +125,13 @@ class AdList extends React.Component {
             <>
               <div className="adList-container">
                 {test.map((item) => {
+                  console.log('SINGLE ITEM', item);
                   return (
                     <SingleAdInList
                       primerjaj={this.state.comp}
                       priljubljeno={this.state.fav}
+                      ime={item.naslov}
+                      datum={item.Created_At}
                       key={item.id}
                       srcImg={'/img/bg/volkswagen.jpg'}
                       znamka={item.znamka}

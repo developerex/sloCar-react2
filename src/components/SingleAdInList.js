@@ -15,6 +15,8 @@ class SingleAdInList extends React.Component {
     primerjaj: false,
     priljubljenoText: 'Dodaj vozilo med priljubljene',
     primerjajText: 'Primerjaj z drugim vozilom',
+    novo: false,
+    date: '',
   };
 
   componentDidMount() {
@@ -41,7 +43,33 @@ class SingleAdInList extends React.Component {
         });
       }
     }
+    this.checkDate();
   }
+
+  checkDate = () => {
+    var date = this.props.datum.substr(0, 10);
+    var year = date.substr(0, 4);
+    var day = date.substr(8, 10);
+    var month = date.substr(4, 4).replace('-', '').replace('-', '');
+
+    var time = this.props.datum.substr(11, 11).split(':');
+
+    var newDate = `${day}.${month}.${year} ob ${time[0]}:${time[1]}`;
+    this.setState({
+      date: newDate,
+    });
+
+    var today = new Date().getTime();
+    var d = new Date(
+      Date.UTC(year, month - 1, day, time[0] - 2, time[1])
+    ).getTime();
+
+    if (today - d < 604800000) {
+      this.setState({
+        novo: true,
+      });
+    }
+  };
 
   componentDidUpdate(prevProps) {
     if (prevProps.priljubljeno.length !== this.props.priljubljeno.length) {
@@ -138,9 +166,19 @@ class SingleAdInList extends React.Component {
         <div className="adList-container__item--img">
           <div>
             <img src={this.props.srcImg} alt="car"></img>
+            <img
+              src="/novo.png"
+              alt="novo"
+              className={
+                this.state.novo
+                  ? 'adList-container__item--img--novo'
+                  : 'displayNone'
+              }
+            />
           </div>
         </div>
         <div className="adList-container__item--data">
+          <p className="adList-container__item--data--ime">{this.props.ime}</p>
           <div>
             <img
               src={`/logo/${this.props.znamka}.png`}
@@ -245,6 +283,9 @@ class SingleAdInList extends React.Component {
               </p>
             </div>
           </div>
+          <p className="adList-container__item--data--datum">
+            Objavljeno: {this.state.date}
+          </p>
         </div>
       </div>
     );
