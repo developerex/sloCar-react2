@@ -12,7 +12,6 @@ import Loader from '../utils/Loader';
 class Prijava extends Component {
   state = {
     user: {
-      username: '',
       email: '',
       password: '',
       passConfirm: '',
@@ -95,40 +94,135 @@ class Prijava extends Component {
   };
 
   handleSubmit = (e) => {
+    e.preventDefault();
     this.setState({
       loading: true,
       msgLogin: '',
       msgReg: '',
       msg: '',
     });
-    e.preventDefault();
     let list = e.target.getElementsByTagName('input');
     var arr = [...list];
     for (var item in arr) {
       if (arr[item].dataset.info === 'reg') {
-        this.props.registerUser(this.state.user);
+        if (
+          this.state.user.email !== '' &&
+          this.state.user.password !== '' &&
+          this.state.user.passConfirm !== ''
+        ) {
+          if (
+            /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
+              this.state.user.email
+            ) &&
+            this.state.user.password.length >= 6 &&
+            this.state.user.passConfirm.length >= 6
+          ) {
+            this.props.registerUser(this.state.user);
+            console.log('POSLANOOOOOOOOOOOOOOOOO');
+          } else if (
+            this.state.user.password.length < 6 ||
+            this.state.user.passConfirm.length < 6
+          ) {
+            this.setState({
+              msgReg: 'Geslo mora vsebovati vsaj 6 znakov',
+              green: false,
+              loading: false,
+            });
+          } else {
+            this.setState({
+              msgReg: 'Napačen e-mail naslov',
+              green: false,
+              loading: false,
+            });
+          }
+        } else {
+          this.setState({
+            msgReg: 'E-mail, geslo in ponovitev gesla so obvezni',
+            green: false,
+            loading: false,
+          });
+        }
       } else if (arr[item].dataset.info === 'login') {
-        this.props.loginUser({
-          email: this.state.user.email,
-          password: this.state.user.password,
-        });
+        if (this.state.user.email !== '' && this.state.user.password !== '') {
+          if (
+            /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
+              this.state.user.email
+            ) &&
+            this.state.user.password.length >= 6
+          ) {
+            this.props.loginUser({
+              email: this.state.user.email,
+              password: this.state.user.password,
+            });
+          } else if (this.state.user.password.length < 6) {
+            this.setState({
+              msgLogin: 'Geslo mora vsebovati vsaj 6 znakov',
+              green: false,
+              loading: false,
+            });
+          } else {
+            this.setState({
+              msgLogin: 'Napačen e-mail naslov',
+              green: false,
+              loading: false,
+            });
+          }
+        } else {
+          this.setState({
+            msgLogin: 'E-mail in geslo sta obvezna',
+            green: false,
+            loading: false,
+          });
+        }
       } else if (arr[item].dataset.info === 'pozabilGeslo') {
-        this.props.pozabilGesloUser({
-          email: this.state.user.email,
-        });
+        if (this.state.user.email !== '') {
+          if (
+            /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
+              this.state.user.email
+            )
+          ) {
+            this.props.pozabilGesloUser({
+              email: this.state.user.email,
+            });
+          } else {
+            this.setState({
+              msg: 'Napačen e-mail naslov',
+              green: false,
+              loading: false,
+            });
+          }
+        } else {
+          this.setState({
+            msg: 'E-mail je obvezen',
+            green: false,
+            loading: false,
+          });
+        }
       }
     }
   };
 
   handleLoginReg = () => {
-    this.setState({
-      reg: !this.state.reg,
-      msg: '',
-      msgLogin: '',
-      msgReg: '',
-      pozabilGeslo: false,
-      green: false,
-    });
+    if (this.state.pozabilGeslo) {
+      console.log('YES');
+      this.setState({
+        reg: false,
+        msg: '',
+        msgLogin: '',
+        msgReg: '',
+        pozabilGeslo: false,
+        green: false,
+      });
+    } else {
+      this.setState({
+        reg: !this.state.reg,
+        msg: '',
+        msgLogin: '',
+        msgReg: '',
+        pozabilGeslo: false,
+        green: false,
+      });
+    }
   };
 
   change = (e) => {
@@ -171,11 +265,13 @@ class Prijava extends Component {
       msg: '',
       msgLogin: '',
       msgReg: '',
+      green: false,
     });
   };
 
   render() {
     console.log('props prijava', this.props);
+    console.log('STATE prijava', this.state);
 
     if (this.props.userData && this.props.userData.login)
       return <Redirect to="/racun" />;
@@ -190,13 +286,6 @@ class Prijava extends Component {
                 ? 'Prijava'
                 : 'Ponastavi geslo'}
             </h2>
-            <label
-              htmlFor="username"
-              className={this.state.reg ? null : 'prijava__displayNone'}
-            >
-              <p>Username</p>
-              <input type="text" onChange={this.handleChange} name="username" />
-            </label>
             <label htmlFor="email">
               <p>E-mail naslov</p>
               <input type="email" onChange={this.handleChange} name="email" />
@@ -287,7 +376,9 @@ class Prijava extends Component {
                 'Pozabil sem geslo'}
             </p>
             <p onClick={this.handleLoginReg} id="imaRacun">
-              {this.state.reg
+              {this.state.pozabilGeslo
+                ? 'Že imaš račun? Prijavi se tukaj'
+                : this.state.reg
                 ? 'Že imaš račun? Prijavi se tukaj'
                 : 'Še nimaš računa? Registriraj se zdaj'}
             </p>

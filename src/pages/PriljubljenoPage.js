@@ -113,6 +113,8 @@ class PriljubljenoPage extends Component {
           {this.state.favAds.map((item) => {
             return (
               <SingleAdInList
+                ime={item.naslov}
+                datum={item.Created_At}
                 primerjaj={this.state.comp}
                 priljubljeno={this.state.fav}
                 key={item.id}

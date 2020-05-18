@@ -322,6 +322,8 @@ class PrimerjavaPage extends Component {
             console.log('OPREMA', item);
             return (
               <SingleAdIdComparison
+                ime={item.naslov}
+                datum={item.Created_At}
                 primerjaj={this.state.comp}
                 key={item.id}
                 srcImg={'/img/bg/volkswagen.jpg'}

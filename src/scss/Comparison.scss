@@ -21,8 +21,15 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 
     &--img {
-      position: relative;
       padding-top: 56.25%;
+      position: relative;
+
+      &--novo {
+        position: absolute;
+        height: 55px !important;
+        top: 0;
+        left: 0;
+      }
 
       & div {
         position: absolute;
@@ -43,13 +50,32 @@
     &--data {
       display: grid;
       grid-template-columns: repeat(2, 50%);
-      grid-template-rows: repeat(3, auto) 40px auto;
+      grid-template-rows: repeat(4, auto) 40px auto;
       justify-content: center;
       align-content: center;
       //column-gap: 10px;
       //row-gap: 5px;
       padding-left: 1.5rem;
       padding-right: 1.5rem;
+      margin-top: -0.5rem;
+
+      &--ime {
+        grid-column: 1 / -1;
+        font-size: 1.7rem;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        display: inline-block;
+        width: 275px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        cursor: pointer;
+      }
+
+      &--datum {
+        grid-column: 1 / -1;
+        font-size: 1.2rem;
+      }
 
       & div {
         display: flex;
@@ -65,23 +91,22 @@
         padding: 0.2rem;
       }
       & div:nth-child(2) {
-        border-left: 1px solid rgba(0, 0, 0, 0.3);
+        border-right: 1px solid rgba(0, 0, 0, 0.3);
         border-bottom: 1px solid rgba(0, 0, 0, 0.3);
         padding: 0.2rem;
       }
       & div:nth-child(3) {
-        border-right: 1px solid rgba(0, 0, 0, 0.3);
         border-bottom: 1px solid rgba(0, 0, 0, 0.3);
       }
       & div:nth-child(4) {
-        border-left: 1px solid rgba(0, 0, 0, 0.3);
+        border-right: 1px solid rgba(0, 0, 0, 0.3);
         border-bottom: 1px solid rgba(0, 0, 0, 0.3);
       }
       & div:nth-child(5) {
-        border-right: 1px solid rgba(0, 0, 0, 0.3);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.3);
       }
       & div:nth-child(6) {
-        border-left: 1px solid rgba(0, 0, 0, 0.3);
+        border-right: 1px solid rgba(0, 0, 0, 0.3);
       }
 
       & a {
@@ -94,7 +119,7 @@
         border-radius: 2px;
         width: 100%;
         margin: 0 auto;
-        grid-row: 4 / 5;
+        grid-row: 5 / 6;
         grid-column: 1 / -1;
         font-size: 1.8rem;
         font-weight: 600;
