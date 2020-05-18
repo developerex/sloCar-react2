@@ -21,6 +21,24 @@ class AdList extends React.Component {
     fav: [],
     comp: [],
     compTab: false,
+    scroll: false,
+  };
+
+  constructor(props) {
+    super(props);
+    window.addEventListener('scroll', this.handleScroll, true);
+  }
+
+  handleScroll = (e) => {
+    if (document.documentElement.scrollTop > 0) {
+      this.setState({
+        scroll: true,
+      });
+    } else {
+      this.setState({
+        scroll: false,
+      });
+    }
   };
 
   componentDidMount() {
@@ -144,6 +162,16 @@ class AdList extends React.Component {
           return (
             <>
               <div className="adList-container">
+                <div
+                  className={
+                    this.state.scroll
+                      ? 'sideBarLeftAndRight sideBarLeftAndRight--true'
+                      : 'sideBarLeftAndRight sideBarLeftAndRight--false'
+                  }
+                >
+                  <AdListSidebarLeft scroll={this.state.scroll} />
+                  <AdListSidebarRight scroll={this.state.scroll} />
+                </div>
                 {test.map((item) => {
                   //console.log('SINGLE ITEM', item);
                   return (
@@ -170,9 +198,6 @@ class AdList extends React.Component {
                 {this.renderPrimerjajTab()}
               </div>
               <Pagination />
-
-              <AdListSidebarLeft />
-              <AdListSidebarRight />
             </>
           );
         }}

@@ -1,18 +1,18 @@
 @import '../variables.scss';
 
 .adList-container {
-  grid-column: center-start / center-end;
+  grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: repeat(auto-fit, 300px);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 350px));
   //grid-template-rows: repeat(4, 500px);
   justify-content: center;
   row-gap: 1rem;
   column-gap: 1rem;
-  padding-top: 1rem;
+  padding: 1rem;
 
   &__item {
     display: grid;
-    height: 620px;
+    min-height: 620px;
     grid-template-rows: repeat(2, auto);
     row-gap: 0.5rem;
     border: 1px solid#555;
@@ -214,5 +214,26 @@
       background-color: #555;
       margin-left: 1.5rem;
     }
+  }
+}
+
+.sideBarLeftAndRight {
+  position: fixed;
+  left: 0;
+  right: 0;
+  background-color: #fbfbfb;
+  border-top: 2px solid #555;
+  border-bottom: 2px solid #555;
+  z-index: 100;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-template-columns: repeat(2, auto);
+  &--false {
+    top: 101px;
+    height: 55px;
+  }
+  &--true {
+    top: 61px;
+    height: 40px;
   }
 }

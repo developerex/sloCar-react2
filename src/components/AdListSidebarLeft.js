@@ -5,19 +5,19 @@ import { Link } from 'react-router-dom';
 
 export default class AdListSidebarLeft extends React.Component {
   state = {
-    filter: true
+    filter: true,
   };
 
   handlefilter = () => {
     this.setState({
-      filter: !this.state.filter
+      filter: !this.state.filter,
     });
   };
 
   render() {
     return (
       <AdConsumer>
-        {value => {
+        {(value) => {
           const {
             handleChange,
             vseZnamke,
@@ -48,13 +48,17 @@ export default class AdListSidebarLeft extends React.Component {
             motorDo,
             filteredAds,
             modelToModel,
-            setToDefault
+            setToDefault,
           } = value;
 
           return (
             <div className="adList-sidebarLeft">
               <button
-                className="adList-sidebarLeft__filter"
+                className={
+                  this.props.scroll
+                    ? 'adList-sidebarLeft__filter adList-sidebarLeft__filter--true'
+                    : 'adList-sidebarLeft__filter'
+                }
                 onClick={this.handlefilter}
               >
                 {this.state.filter === true ? 'Skrij filtre' : 'Prikazi filtre'}
@@ -66,33 +70,15 @@ export default class AdListSidebarLeft extends React.Component {
                     : 'adList-sidebarLeft__content adList-sidebarLeft__content--filter--false'
                 }
               >
-                {/* oblika */}
-                <div>
-                  <select
-                    name="oblika"
-                    id="oblika"
-                    onChange={handleChange}
-                    value={oblika}
-                  >
-                    {vseOblike.map(item => {
-                      return (
-                        <option key={item.id} value={item.oblika}>
-                          {item.oblika}
-                        </option>
-                      );
-                    })}
-                  </select>
-                </div>
-                {/* end oblika */}
                 {/* cena */}
-                <div>
+                <div className="adList-sidebarLeft__content--singleDiv">
                   <select
                     name="cenaOd"
                     id="cenaOd"
                     onChange={handleChange}
                     value={cenaOd}
                   >
-                    {vseCeneOd.map(item => {
+                    {vseCeneOd.map((item) => {
                       return (
                         <option key={item.id} value={item.cenaOd}>
                           {item.id > 0
@@ -110,7 +96,7 @@ export default class AdListSidebarLeft extends React.Component {
                     onChange={handleChange}
                     value={cenaDo}
                   >
-                    {vseCeneDo.map(item => {
+                    {vseCeneDo.map((item) => {
                       return (
                         <option key={item.id} value={item.cenaDo}>
                           {item.id > 0
@@ -125,14 +111,14 @@ export default class AdListSidebarLeft extends React.Component {
                 </div>
                 {/* end cena */}
                 {/* prostornina */}
-                <div>
+                <div className="adList-sidebarLeft__content--singleDiv">
                   <select
                     name="prostorninaOd"
                     id="prostorninaOd"
                     onChange={handleChange}
                     value={prostorninaOd}
                   >
-                    {vseProstornineOd.map(item => {
+                    {vseProstornineOd.map((item) => {
                       return (
                         <option key={item.id} value={item.prostorninaOd}>
                           {item.id > 0
@@ -148,7 +134,7 @@ export default class AdListSidebarLeft extends React.Component {
                     onChange={handleChange}
                     value={prostorninaDo}
                   >
-                    {vseProstornineDo.map(item => {
+                    {vseProstornineDo.map((item) => {
                       return (
                         <option key={item.id} value={item.prostorninaDo}>
                           {item.id > 0
@@ -161,14 +147,14 @@ export default class AdListSidebarLeft extends React.Component {
                 </div>
                 {/* end prostornina */}
                 {/* motor */}
-                <div>
+                <div className="adList-sidebarLeft__content--singleDiv">
                   <select
                     name="motorOd"
                     id="motorOd"
                     onChange={handleChange}
                     value={motorOd}
                   >
-                    {vsiMotorjiOd.map(item => {
+                    {vsiMotorjiOd.map((item) => {
                       return (
                         <option key={item.id} value={item.motorOd}>
                           {item.id > 0
@@ -184,7 +170,7 @@ export default class AdListSidebarLeft extends React.Component {
                     onChange={handleChange}
                     value={motorDo}
                   >
-                    {vsiMotorjiDo.map(item => {
+                    {vsiMotorjiDo.map((item) => {
                       return (
                         <option key={item.id} value={item.motorDo}>
                           {item.id > 0
@@ -197,14 +183,14 @@ export default class AdListSidebarLeft extends React.Component {
                 </div>
                 {/* end motor */}
                 {/* letnik */}
-                <div>
+                <div className="adList-sidebarLeft__content--singleDiv">
                   <select
                     name="letnikOd"
                     id="letnikOd"
                     onChange={handleChange}
                     value={letnikOd}
                   >
-                    {vsiLetnikiOd.map(item => {
+                    {vsiLetnikiOd.map((item) => {
                       return (
                         <option key={item.id} value={item.letnikOd}>
                           {item.id > 0 ? item.letnikOd : 'letnik od'}
@@ -218,7 +204,7 @@ export default class AdListSidebarLeft extends React.Component {
                     onChange={handleChange}
                     value={letnikDo}
                   >
-                    {vsiLetnikiDo.map(item => {
+                    {vsiLetnikiDo.map((item) => {
                       return (
                         <option key={item.id} value={item.letnikDo}>
                           {item.id > 0 ? item.letnikDo : 'letnik do'}
@@ -228,10 +214,10 @@ export default class AdListSidebarLeft extends React.Component {
                   </select>
                 </div>
                 {/* end letnik */}
-                {/* km */}
-                <div>
+                {/* km & oblika */}
+                <div className="adList-sidebarLeft__content--singleDiv">
                   <select name="km" id="km" onChange={handleChange} value={km}>
-                    {vsiKm.map(item => {
+                    {vsiKm.map((item) => {
                       return (
                         <option key={item.id} value={item.km}>
                           {item.km > 0
@@ -243,17 +229,33 @@ export default class AdListSidebarLeft extends React.Component {
                       );
                     })}
                   </select>
+                  {/* oblika */}
+                  <select
+                    name="oblika"
+                    id="oblika"
+                    onChange={handleChange}
+                    value={oblika}
+                  >
+                    {vseOblike.map((item) => {
+                      return (
+                        <option key={item.id} value={item.oblika}>
+                          {item.oblika}
+                        </option>
+                      );
+                    })}
+                  </select>
+                  {/* end oblika */}
                 </div>
                 {/* end km */}
                 {/* poraba */}
-                <div>
+                <div className="adList-sidebarLeft__content--singleDiv">
                   <select
                     name="poraba"
                     id="poraba"
                     onChange={handleChange}
                     value={poraba}
                   >
-                    {vsePorabe.map(item => {
+                    {vsePorabe.map((item) => {
                       return (
                         <option key={item.id} value={item.poraba}>
                           {item.poraba > 0
@@ -265,9 +267,8 @@ export default class AdListSidebarLeft extends React.Component {
                   </select>
                 </div>
                 {/* end poraba */}
-                <div>
+                <div className="adList-sidebarLeft__steviloPonudb">
                   <p>
-                    {' '}
                     {filteredAds.length === 1
                       ? filteredAds.length + ' PONUDBA'
                       : filteredAds.length === 2

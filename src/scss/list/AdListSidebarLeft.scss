@@ -1,40 +1,48 @@
 @import '../variables.scss';
 
 .adList-sidebarLeft {
-  grid-column: 1 / 2;
-  grid-row: 1 / 2;
   display: flex;
   flex-direction: column;
+  grid-column: 1 / -1;
+  grid-row: 1 /2;
 
   &__filter {
     align-self: center;
-    width: 20rem;
-    height: 5rem;
-    margin-top: 5rem;
-    font-size: 1.8rem;
+    width: 15rem;
+    height: 3rem;
+    font-size: 1.6rem;
+    margin: 1rem;
     outline: none;
     border: 2px solid #555;
     cursor: pointer;
-    background-color: #fff;
+    background-color: #555;
+    align-self: flex-start;
+    color: #fff;
+    &--true {
+      width: 13rem;
+      height: 2.5rem;
+      font-size: 1.3rem;
+      margin: 0.55rem;
+    }
   }
 
   &__content {
-    margin-top: 5rem;
-    width: 100%;
-    height: 450px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 140px);
+    align-items: center;
+    justify-content: center;
     transition: all 0.3s;
     background-color: #fbfbfb;
     padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid #555;
+    border-bottom: 2px solid #555;
+    border-top: 1px solid #555;
 
-    & div {
+    &--singleDiv {
       & select {
-        margin: 1rem 0.5rem;
+        margin: 0.5rem 0.5rem;
         height: 30px;
-        width: 100px;
+        width: 120px;
+        font-size: 1.3rem;
         border: 1px solid #555;
         outline: none;
       }
@@ -49,13 +57,25 @@
         }
       }
     }
-
     &--filter--true {
       transform: translate(0);
     }
 
     &--filter--false {
       transform: translate(-100%);
+    }
+  }
+
+  &__steviloPonudb {
+    font-size: 1.4rem;
+    outline: none;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+
+    p {
+      font-weight: 600;
+      border-bottom: 1px solid #555;
     }
   }
 }
