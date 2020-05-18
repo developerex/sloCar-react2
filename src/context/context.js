@@ -45,7 +45,7 @@ export class AdProvider extends Component {
     ads: [],
     filteredAds: [],
     currentPage: 0,
-    pages: 10,
+    pages: 18,
     prevNext: {
       activePrev: false,
       activeNext: true,
@@ -120,12 +120,12 @@ export class AdProvider extends Component {
     });
   };
 
-  pagination = (adsArray, type = 'nimaveze') => {
+  pagination = (adsArray, type = 'nimaveze', e) => {
     if (type === 'next') {
       this.setState(
         {
-          currentPage: this.state.currentPage + 10,
-          pages: this.state.pages + 10,
+          currentPage: this.state.currentPage + 18,
+          pages: this.state.pages + 18,
           prevNext: {
             activePrev: true,
             activeNext: true,
@@ -134,12 +134,11 @@ export class AdProvider extends Component {
         },
         () => window.scrollTo(0, 0)
       );
-    }
-    if (type === 'prev') {
+    } else if (type === 'prev') {
       this.setState(
         {
-          currentPage: this.state.currentPage + -10,
-          pages: this.state.pages - 10,
+          currentPage: this.state.currentPage + -18,
+          pages: this.state.pages - 18,
           prevNext: {
             activePrev: this.state.prevNext.activePrev,
             activeNext: this.state.prevNext.activeNext,
@@ -148,6 +147,18 @@ export class AdProvider extends Component {
         },
         () => window.scrollTo(0, 0)
       );
+    } else if (type === 'goToPageNum') {
+      let num = e.target.dataset.pagenum;
+      this.setState({
+        pages: (num - 1) * 18 + 18,
+        currentPage: (num - 1) * 18,
+        prevNext: {
+          activePrev: num - 1 > 0 ? true : false,
+          activeNext:
+            num - 1 < this.state.filteredAds.length - 1 ? true : false,
+          singlePage: num - 1,
+        },
+      });
     }
     const display10Ads = adsArray.slice(
       this.state.currentPage,
@@ -159,7 +170,7 @@ export class AdProvider extends Component {
   setToDefault = () => {
     this.setState({
       currentPage: 0,
-      pages: 10,
+      pages: 18,
       prevNext: {
         activePrev: false,
         activeNext: true,
@@ -169,7 +180,7 @@ export class AdProvider extends Component {
   };
 
   render() {
-    console.log(this.state);
+    console.log('CONTEXT', this.state.prevNext.singlePage);
 
     return (
       <AdContext.Provider

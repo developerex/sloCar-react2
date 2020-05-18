@@ -181,16 +181,25 @@
     bottom: 0;
     left: 0;
     right: 0;
+    z-index: 10;
     background-color: #f3f3f3;
     height: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-top: 2px solid #555;
-    column-gap: 3rem;
+
+    &--close {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 45px;
+      cursor: pointer;
+    }
 
     p {
       font-size: 1.8rem;
+      margin-right: 1.5rem;
     }
 
     &--btn {
@@ -203,6 +212,7 @@
       font-weight: 600;
       font-size: 1.8rem;
       background-color: #555;
+      margin-left: 1.5rem;
     }
   }
 }

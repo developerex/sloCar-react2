@@ -20,6 +20,7 @@ class AdList extends React.Component {
   state = {
     fav: [],
     comp: [],
+    compTab: false,
   };
 
   componentDidMount() {
@@ -32,7 +33,7 @@ class AdList extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (
       this.props.favCompCD !== prevProps.favCompCD &&
       this.props.userData.userLogin.token
@@ -85,12 +86,31 @@ class AdList extends React.Component {
         });
       }
     }
+    if (prevState.comp.length !== this.state.comp.length) {
+      if (this.state.comp.length > 0) {
+        this.setState({
+          compTab: true,
+        });
+      }
+    }
   }
 
+  closeTab = () => {
+    this.setState({
+      compTab: false,
+    });
+  };
+
   renderPrimerjajTab = () => {
-    if (this.state.comp.length > 0) {
+    if (this.state.comp.length > 0 && this.state.compTab) {
       return (
         <div className="adList-container__comparisonTab">
+          <img
+            className={'adList-container__comparisonTab--close'}
+            src="/close.png"
+            alt="zapri"
+            onClick={this.closeTab}
+          />
           <p>
             {this.state.comp.length === 1
               ? 'Za primerjavo morate izbrati še vsaj eno vozilo'
@@ -125,7 +145,7 @@ class AdList extends React.Component {
             <>
               <div className="adList-container">
                 {test.map((item) => {
-                  console.log('SINGLE ITEM', item);
+                  //console.log('SINGLE ITEM', item);
                   return (
                     <SingleAdInList
                       primerjaj={this.state.comp}
