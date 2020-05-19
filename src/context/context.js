@@ -149,19 +149,21 @@ export class AdProvider extends Component {
       );
     } else if (type === 'goToPageNum') {
       let num = e.target.dataset.pagenum;
-      this.setState(
-        {
-          pages: (num - 1) * 18 + 18,
-          currentPage: (num - 1) * 18,
-          prevNext: {
-            activePrev: num - 1 > 0 ? true : false,
-            activeNext:
-              num - 1 < this.state.filteredAds.length - 1 ? true : false,
-            singlePage: num - 1,
+      if (num !== '...') {
+        this.setState(
+          {
+            pages: (num - 1) * 18 + 18,
+            currentPage: (num - 1) * 18,
+            prevNext: {
+              activePrev: num - 1 > 0 ? true : false,
+              activeNext:
+                num - 1 < this.state.filteredAds.length - 1 ? true : false,
+              singlePage: num - 1,
+            },
           },
-        },
-        () => window.scrollTo(0, 0)
-      );
+          () => window.scrollTo(0, 0)
+        );
+      }
     }
     const display10Ads = adsArray.slice(
       this.state.currentPage,

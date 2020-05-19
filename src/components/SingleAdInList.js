@@ -17,6 +17,8 @@ class SingleAdInList extends React.Component {
     primerjajText: 'Primerjaj z drugim vozilom',
     novo: false,
     date: '',
+    hoverText: false,
+    hoverTextPrimerjaj: false,
   };
 
   componentDidMount() {
@@ -31,7 +33,6 @@ class SingleAdInList extends React.Component {
       if (this.props.priljubljeno.includes(this.props.id)) {
         this.setState({
           priljubljeno: true,
-          priljubljenoText: 'Odstrani vozilo iz priljubljenih',
         });
       }
     }
@@ -39,7 +40,6 @@ class SingleAdInList extends React.Component {
       if (this.props.primerjaj.includes(this.props.id)) {
         this.setState({
           primerjaj: true,
-          primerjajText: 'Odstrani vozilo iz primerjave',
         });
       }
     }
@@ -74,25 +74,42 @@ class SingleAdInList extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.priljubljeno.length !== this.props.priljubljeno.length) {
       if (this.props.priljubljeno.includes(this.props.id)) {
-        this.setState({
-          priljubljeno: true,
-          priljubljenoText: 'Odstrani vozilo iz priljubljenih',
-        });
+        this.setState(
+          {
+            priljubljeno: true,
+            priljubljenoText: 'Dodano med priljubljene',
+            hoverText: true,
+          },
+          () =>
+            setTimeout(() => {
+              this.setState({
+                hoverText: false,
+              });
+            }, 1000)
+        );
       }
       if (this.props.priljubljeno.length === 0) {
         this.setState({
           priljubljeno: false,
-          priljubljenoText: 'Dodaj vozilo med priljubljene',
           reqLogin: true,
         });
       }
     }
     if (prevProps.primerjaj.length !== this.props.primerjaj.length) {
       if (this.props.primerjaj.includes(this.props.id)) {
-        this.setState({
-          primerjaj: true,
-          primerjajText: 'Odstrani vozilo iz primerjave',
-        });
+        this.setState(
+          {
+            primerjaj: true,
+            primerjajText: 'Dodano v primerjavo',
+            hoverTextPrimerjaj: true,
+          },
+          () =>
+            setTimeout(() => {
+              this.setState({
+                hoverTextPrimerjaj: false,
+              });
+            }, 1000)
+        );
       }
       if (
         this.props.primerjaj.length === 0 &&
@@ -100,7 +117,6 @@ class SingleAdInList extends React.Component {
       ) {
         this.setState({
           primerjaj: false,
-          primerjajText: 'Primerjaj z drugim vozilom',
           reqLogin: true,
         });
       }
@@ -109,19 +125,37 @@ class SingleAdInList extends React.Component {
 
   priljubljenoClicked = (e, id) => {
     if (this.state.reqLogin) {
-      this.setState({
-        priljubljenoText: 'Najprej se morate prijaviti',
-      });
+      this.setState(
+        {
+          priljubljenoText: 'Najprej se morate prijaviti',
+          hoverText: true,
+        },
+        () =>
+          setTimeout(() => {
+            this.setState({
+              hoverText: false,
+            });
+          }, 1000)
+      );
     } else {
       if (e.target.dataset.priljubljeno === 'prilDodaj') {
         this.props.dodajMedPriljubljeneCD(
           id,
           this.props.userData.userLogin.token
         );
-        this.setState({
-          priljubljeno: true,
-          priljubljenoText: 'Odstrani vozilo iz priljubljenih',
-        });
+        this.setState(
+          {
+            priljubljeno: true,
+            priljubljenoText: 'Dodano med priljubljene',
+            hoverText: true,
+          },
+          () =>
+            setTimeout(() => {
+              this.setState({
+                hoverText: false,
+              });
+            }, 1000)
+        );
       } else {
         this.props.izbrisiPriljubljeneCD(
           id,
@@ -129,7 +163,6 @@ class SingleAdInList extends React.Component {
         );
         this.setState({
           priljubljeno: false,
-          priljubljenoText: 'Dodaj vozilo med priljubljene',
         });
       }
     }
@@ -137,17 +170,35 @@ class SingleAdInList extends React.Component {
 
   primerjajClicked = (e, id) => {
     if (this.state.reqLogin) {
-      this.setState({
-        primerjajText: 'Najprej se morate prijaviti',
-      });
+      this.setState(
+        {
+          primerjajText: 'Najprej se morate prijaviti',
+          hoverTextPrimerjaj: true,
+        },
+        () =>
+          setTimeout(() => {
+            this.setState({
+              hoverTextPrimerjaj: false,
+            });
+          }, 1000)
+      );
     } else {
       if (e.target.dataset.primerjaj === 'primerjajDodaj') {
         if (this.props.primerjaj.length < 3) {
           this.props.dodajPrimerjajCD(id, this.props.userData.userLogin.token);
-          this.setState({
-            primerjaj: true,
-            primerjajText: 'Odstrani vozilo iz primerjave',
-          });
+          this.setState(
+            {
+              primerjaj: true,
+              primerjajText: 'Dodano v primerjavo',
+              hoverTextPrimerjaj: true,
+            },
+            () =>
+              setTimeout(() => {
+                this.setState({
+                  hoverTextPrimerjaj: false,
+                });
+              }, 1000)
+          );
         }
       } else {
         this.props.izbrisiPrimerjajCD(id, this.props.userData.userLogin.token);
@@ -164,7 +215,7 @@ class SingleAdInList extends React.Component {
     return (
       <div className="adList-container__item" key={this.props.key}>
         <div className="adList-container__item--img">
-          <div>
+          <div className="adList-container__item--img--imgContainer">
             <img src={this.props.srcImg} alt="car"></img>
             <img
               src="/novo.png"
@@ -179,7 +230,7 @@ class SingleAdInList extends React.Component {
         </div>
         <div className="adList-container__item--data">
           <p className="adList-container__item--data--ime">{this.props.ime}</p>
-          <div>
+          <div className="adList-container__item--data--mainDivs adList-container__item--data--znamka">
             <img
               src={`/logo/${this.props.znamka}.png`}
               alt={this.props.znamka}
@@ -187,15 +238,11 @@ class SingleAdInList extends React.Component {
             />
             <p>{this.props.model}</p>
           </div>
-          <div>
-            <img
-              src={`/oblika/${this.props.oblika}.png`}
-              alt={this.props.oblika}
-              style={{ width: '50px' }}
-            ></img>
-            <p>{this.props.oblika}</p>
+          <div className="adList-container__item--data--mainDivs adList-container__item--data--letnik">
+            <img src={'/letnik.png'} alt="letnik" style={{ width: '20px' }} />
+            <p>{this.props.letnik}</p>
           </div>
-          <div>
+          <div className="adList-container__item--data--mainDivs adList-container__item--data--km">
             <img
               src="/prevozeni.png"
               alt="prevozeni kilometri"
@@ -205,15 +252,19 @@ class SingleAdInList extends React.Component {
               {parseInt(this.props.km).toLocaleString().replace(',', '.')} km
             </p>
           </div>
-          <div>
+          <div className="adList-container__item--data--mainDivs adList-container__item--data--motor">
             <img src="/motor.png" alt="moc motorja" style={{ width: '20px' }} />
             <p>{this.props.motor} KM</p>
           </div>
-          <div>
-            <img src={'/letnik.png'} alt="letnik" style={{ width: '20px' }} />
-            <p>{this.props.letnik}</p>
+          <div className="adList-container__item--data--mainDivs adList-container__item--data--oblika">
+            <img
+              src={`/oblika/${this.props.oblika}.png`}
+              alt={this.props.oblika}
+              style={{ width: '50px' }}
+            ></img>
+            <p>{this.props.oblika}</p>
           </div>
-          <div>
+          <div className="adList-container__item--data--mainDivs adList-container__item--data--gorivo">
             <img
               src={`/gorivo/${this.props.gorivo}.png`}
               alt={this.props.gorivo}
@@ -234,8 +285,39 @@ class SingleAdInList extends React.Component {
             Oglej si oglas
           </Link>
 
+          <p
+            className={
+              this.state.hoverText
+                ? 'adList-container__item--data--hoverPriljubljenoText'
+                : 'displayNone'
+            }
+            style={{
+              color:
+                this.state.priljubljenoText === 'Najprej se morate prijaviti'
+                  ? '#DC143C'
+                  : '#32CD32',
+            }}
+          >
+            {this.state.priljubljenoText}
+          </p>
+          <p
+            className={
+              this.state.hoverTextPrimerjaj
+                ? 'adList-container__item--data--hoverPrimerjajText'
+                : 'displayNone'
+            }
+            style={{
+              color:
+                this.state.primerjajText === 'Najprej se morate prijaviti'
+                  ? '#DC143C'
+                  : '#32CD32',
+            }}
+          >
+            {this.state.primerjajText}
+          </p>
+
           <div className="adList-container__item--primerjajPriljubljeno">
-            <div>
+            <div className="adList-container__item--primerjajPriljubljeno--divs">
               <img
                 src={
                   this.state.primerjaj ? '/primerjaj2.png' : '/primerjaj.png'
@@ -246,18 +328,8 @@ class SingleAdInList extends React.Component {
                 }
                 onClick={(e) => this.primerjajClicked(e, this.props.id)}
               />
-              <p
-                style={{
-                  color:
-                    this.state.primerjajText === 'Najprej se morate prijaviti'
-                      ? '#DC143C'
-                      : '#000',
-                }}
-              >
-                {this.state.primerjajText}
-              </p>
             </div>
-            <div>
+            <div className="adList-container__item--primerjajPriljubljeno--divs adList-container__item--primerjajPriljubljeno--divs--priljubljeno">
               <img
                 src={
                   this.state.priljubljeno
@@ -270,17 +342,6 @@ class SingleAdInList extends React.Component {
                 }
                 onClick={(e) => this.priljubljenoClicked(e, this.props.id)}
               />
-              <p
-                style={{
-                  color:
-                    this.state.priljubljenoText ===
-                    'Najprej se morate prijaviti'
-                      ? '#DC143C'
-                      : '#000',
-                }}
-              >
-                {this.state.priljubljenoText}
-              </p>
             </div>
           </div>
           <p className="adList-container__item--data--datum">
