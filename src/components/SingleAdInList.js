@@ -317,7 +317,7 @@ class SingleAdInList extends React.Component {
           </p>
 
           <div className="adList-container__item--primerjajPriljubljeno">
-            <div className="adList-container__item--primerjajPriljubljeno--divs">
+            <div className="adList-container__item--primerjajPriljubljeno--divs adList-container__item--primerjajPriljubljeno--divs--primerjaj">
               <img
                 src={
                   this.state.primerjaj ? '/primerjaj2.png' : '/primerjaj.png'
