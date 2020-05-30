@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from 'react';
+import React, { Component } from 'react';
 import '../../scss/createAd/UploadImages.scss';
 import { CreateAdContextConsumer } from './CreateAdContext';
 
@@ -6,12 +6,12 @@ export default class UploadImages extends Component {
   render() {
     return (
       <CreateAdContextConsumer>
-        {value => {
+        {(value) => {
           const {
             handleNaslovna,
             handleOstaleSlike,
             ostaleSlike,
-            naslovna
+            naslovna,
           } = value;
           return (
             <div className="uploadImages">
@@ -24,7 +24,7 @@ export default class UploadImages extends Component {
                   id="naslovna"
                   name="naslovna"
                   accept="image/x-png,image/gif,image/jpeg"
-                  onChange={e => handleNaslovna(e)}
+                  onChange={(e) => handleNaslovna(e)}
                 />
                 {naslovna !== '' && (
                   <img
@@ -43,12 +43,12 @@ export default class UploadImages extends Component {
                   id="ostaleSlike"
                   name="ostaleSlike"
                   accept="image/x-png,image/gif,image/jpeg"
-                  onChange={e => handleOstaleSlike(e)}
+                  onChange={(e) => handleOstaleSlike(e)}
                   multiple
                 />
                 <div className="uploadImages__ostaleSlike--preview">
                   {ostaleSlike !== [] &&
-                    ostaleSlike.map(item => <img key={item} src={item} />)}
+                    ostaleSlike.map((item) => <img key={item} src={item} />)}
                 </div>
               </div>
             </div>

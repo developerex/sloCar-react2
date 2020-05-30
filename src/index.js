@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import reduxThunk from 'redux-thunk';
 import { AdProvider } from './context/context';
 import { CreateAdContexProvider } from './components/createAd/CreateAdContext';
+import * as serviceWorker from './serviceWorker';
 
 import App from './App';
 
@@ -22,3 +23,5 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
+
+serviceWorker.register();

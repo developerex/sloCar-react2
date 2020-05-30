@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../scss/naslovna/Navbar.scss';
 import { logoutUser } from '../actions/index';
 import { connect } from 'react-redux';
@@ -35,7 +35,7 @@ const Navbar = (props) => {
   };
 
   //console.log('state nav', this.state);
-  console.log('props nav', props);
+  //console.log('props nav', props);
   //console.log('props nav scrolling', scrolling);
   return (
     <div className={scrolling ? 'navbar navbar--true' : 'navbar navbar--false'}>

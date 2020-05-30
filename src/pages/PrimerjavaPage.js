@@ -7,7 +7,6 @@ import SingleAdIdComparison from '../components/SingleAdInComparison';
 import '../scss/ComparisonPage.scss';
 import '../scss/displayNone.scss';
 import '../scss/Comparison.scss';
-import Loader from '../utils/Loader';
 
 class PrimerjavaPage extends Component {
   state = {
@@ -148,13 +147,13 @@ class PrimerjavaPage extends Component {
     if (len === 3) {
       if (arr.length === 3) {
         if (typeof arr[2][arr[2].length - 1] !== 'string') {
-          for (var k = 0; k < arr[0].length; k++) {
+          for (var j = 0; j < arr[0].length; j++) {
             this.newArr = [
               ...this.compareThreeArrays(
-                arr[0][k],
-                arr[1][k],
-                arr[2][k],
-                list[k]
+                arr[0][j],
+                arr[1][j],
+                arr[2][j],
+                list[j]
               ),
             ];
           }

@@ -108,41 +108,41 @@ export class CreateAdContexProvider extends Component {
     kontakti: [],
     ostaloText: '',
     naslovna: '',
-    ostaleSlike: []
+    ostaleSlike: [],
   };
 
-  ustvariOglasHandleChange = event => {
+  ustvariOglasHandleChange = (event) => {
     const value =
       event.target.type === 'checkbox'
         ? event.target.checked
         : event.target.value;
     this.setState({
-      [event.target.name]: value
+      [event.target.name]: value,
     });
   };
 
   modelToModel = () => {
     this.setState({
-      model: 'model'
+      model: 'model',
     });
   };
 
   kontaktiHandleChange = (ime, st) => {
     this.setState({
-      kontakti: [...this.state.kontakti, { ime, st }]
+      kontakti: [...this.state.kontakti, { ime, st }],
     });
   };
 
-  handleNaslovna = e => {
+  handleNaslovna = (e) => {
     if (e.target.value) {
       const url = URL.createObjectURL(e.target.files[0]);
       this.setState({
-        naslovna: url
+        naslovna: url,
       });
     }
   };
 
-  handleOstaleSlike = e => {
+  handleOstaleSlike = (e) => {
     let urls = [];
     if (e.target.value) {
       for (let i = 0; i < e.target.files.length; i++) {
@@ -150,13 +150,13 @@ export class CreateAdContexProvider extends Component {
         urls.push(url);
       }
       this.setState({
-        ostaleSlike: urls
+        ostaleSlike: urls,
       });
     }
   };
 
   render() {
-    console.log(this.state);
+    //console.log(this.state);
     return (
       <CreateAdContext.Provider
         value={{
@@ -167,7 +167,7 @@ export class CreateAdContexProvider extends Component {
           changeStateToFalse: this.changeStateToFalse,
           kontaktiHandleChange: this.kontaktiHandleChange,
           handleNaslovna: this.handleNaslovna,
-          handleOstaleSlike: this.handleOstaleSlike
+          handleOstaleSlike: this.handleOstaleSlike,
         }}
       >
         {this.props.children}

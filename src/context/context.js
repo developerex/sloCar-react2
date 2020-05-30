@@ -185,7 +185,7 @@ export class AdProvider extends Component {
   };
 
   render() {
-    console.log('CONTEXT', this.state.prevNext.singlePage);
+    //console.log('CONTEXT', this.state.prevNext.singlePage);
 
     return (
       <AdContext.Provider
