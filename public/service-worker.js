@@ -28,14 +28,7 @@ self.addEventListener('install', (e) => {
   );
 });
 
-self.addEventListener('activate', (e) => {
-  let cacheCleaned = caches.keys().then((keys) => {
-    keys.forEach((key) => {
-      if (key !== pwaCache) return caches.delete(key);
-    });
-  });
-  e.waitUntil(cacheCleaned);
-});
+self.addEventListener('activate', (e) => {});
 
 self.addEventListener('fetch', (e) => {
   // cache with network fallback
